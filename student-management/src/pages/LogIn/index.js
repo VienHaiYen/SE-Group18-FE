@@ -1,4 +1,5 @@
 import LogInForm from '~/components/LogInForm';
+
 function LogIn() {
     return (
         <div className="d-flex justify-content-center">

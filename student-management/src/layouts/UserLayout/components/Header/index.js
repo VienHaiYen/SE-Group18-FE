@@ -1,5 +1,18 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 function Header() {
+    var navItems = [
+        { to: '/home', label: 'Trang chủ' },
+        { to: '/about', label: 'Thông tin' },
+        { to: '/grade', label: 'Điểm số ' },
+        { to: '/schedule', label: 'Thời khóa biểu' },
+        { to: '/input-grade', label: 'Nhập điểm cho học sinh' },
+        { to: '/input-student', label: 'Thêm học sinh' },
+        { to: '/class-list', label: 'Danh sách lớp' },
+        { to: '/teacher-schedule', label: 'Lịch dạy' },
+        { to: '/rule', label: 'Quy định' },
+    ];
+
     return (
         <div className="vertical-nav bg-white border" id="sidebar">
             <div className="py-4 px-3 bg-light">
@@ -18,26 +31,13 @@ function Header() {
             </div>
 
             <ul className="nav flex-column bg-white mb-0">
-                <li className="nav-item">
-                    <Link to="/home" className="nav-link text-dark font-italic bg-light">
-                        <div className="nav-link text-dark font-italic">Trang chủ</div>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/about" className="nav-link text-dark font-italic bg-light">
-                        <div className="nav-link text-dark font-italic">Thông tin</div>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/grade" className="nav-link text-dark font-italic bg-light">
-                        <div className="nav-link text-dark font-italic">Điểm số</div>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/schedule" className="nav-link text-dark font-italic bg-light">
-                        <div className="nav-link text-dark font-italic">Thời khóa biểu</div>
-                    </Link>
-                </li>
+                {navItems.map((item, index) => (
+                    <li className="nav-item" key={index}>
+                        <Link to={item.to} className="nav-link text-dark font-italic bg-light">
+                            <div className="nav-link text-dark font-italic">{item.label}</div>
+                        </Link>
+                    </li>
+                ))}
             </ul>
 
             <p className="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
