@@ -2,19 +2,19 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 function Header() {
     var navItems = [
-        { to: '/home', label: 'Trang chủ' },
-        { to: '/about', label: 'Thông tin' },
-        { to: '/grade', label: 'Điểm số ' },
-        { to: '/schedule', label: 'Thời khóa biểu' },
-        { to: '/input-grade', label: 'Nhập điểm cho học sinh' },
-        { to: '/input-student', label: 'Thêm học sinh' },
-        { to: '/class-list', label: 'Danh sách lớp' },
-        { to: '/teacher-schedule', label: 'Lịch dạy' },
-        { to: '/rule', label: 'Quy định' },
+        { to: '/home', label: 'Trang chủ - mn' },
+        { to: '/about', label: 'Thông tin - mn ' },
+        { to: '/grade', label: 'Điểm số - mn' },
+        { to: '/schedule', label: 'Thời khóa biểu - mn' },
+        { to: '/input-grade', label: 'Nhập điểm cho học sinh - gv' },
+        { to: '/input-student', label: 'Thêm học sinh - ad' },
+        { to: '/class-list', label: 'Danh sách lớp - ad, gv' },
+        { to: '/teacher-schedule', label: 'Lịch dạy - ad, gv' },
+        { to: '/rule', label: 'Quy định - ad' },
     ];
 
     return (
-        <div className="vertical-nav bg-white border" id="sidebar">
+        <div className="vertical-nav bg-white border" style={{ minWidth: '250px' }} id="sidebar">
             <div className="py-4 px-3 bg-light">
                 <div className="media d-flex align-items-center">
                     <img
