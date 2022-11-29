@@ -1,0 +1,35 @@
+h3{
+    text-align: center;
+    margin-bottom: 1em;
+}
+.form--row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.form-row-item{
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 2em;
+    width: 100%;
+}
+.form-row-item:last-child{
+    margin-right: 0;
+}
+
+.form-row-item input,
+.form-row-item select{
+    flex: 1;
+    display: inline-block;
+}
+.form-row-item label{
+    width: 100px;
+    margin-right: 0.5em;
+    margin-bottom: 0;
+}
+form button{
+    float: right;
+}
