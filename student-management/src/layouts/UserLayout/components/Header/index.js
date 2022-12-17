@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 function Header() {
     var navItems = [
-        { to: '/home', label: 'Trang chủ - mn' },
+        { to: '/home', label: 'Trang chủ - admin' },
         { to: '/about', label: 'Thông tin - mn ' },
         { to: '/grade', label: 'Điểm số - mn' },
         { to: '/schedule', label: 'Thời khóa biểu - mn' },

@@ -20,25 +20,37 @@ function Rule() {
                     <option>20122-2023</option>
                 </select>
             </div>
-            <div className="">
+            <div>
                 <p>
                     Số Lớp trong trường X phải thỏa mãn:{' '}
                     {(onChanging && (
-                        <input type="text" class="form-control ml-2" style={{ maxWidth: '100px', display: 'inline' }} />
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                        />
                     )) ||
                         numclassName}
                 </p>
                 <p>
                     Số Học sinh có trong 1 lớp học:{' '}
                     {(onChanging && (
-                        <input type="text" class="form-control ml-2" style={{ maxWidth: '100px', display: 'inline' }} />
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                        />
                     )) ||
                         numStuInclassName[0] + '-' + numStuInclassName[1]}
                 </p>
                 <p>
                     Tuổi quy định của mỗi học sinh:{' '}
                     {(onChanging && (
-                        <input type="text" class="form-control ml-2" style={{ maxWidth: '100px', display: 'inline' }} />
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                        />
                     )) ||
                         age[0] + '-' + age[1]}
                 </p>
