@@ -33,9 +33,9 @@ function Header() {
             <ul className="nav flex-column bg-white mb-0">
                 {navItems.map((item, index) => (
                     <li className="nav-item" key={index}>
-                        {/* <Link to={item.to} className="nav-link text-dark font-italic bg-light"> */}
+                        <Link to={item.to} className="nav-link text-dark font-italic bg-light">
                             <div className="nav-link text-dark font-italic">{item.label}</div>
-                        {/* </Link> */}
+                        </Link>
                     </li>
                 ))}
             </ul>
