@@ -1,0 +1,585 @@
+{
+    "user-layout": [
+        {
+            "id": 0,
+            "role": "teacher",
+            "display": [
+                {
+                    "to": "/about",
+                    "label": "Thông tin"
+                },
+                {
+                    "to": "/grade",
+                    "label": "Điểm số"
+                },
+                {
+                    "to": "/input-grade",
+                    "label": "Nhập điểm cho học sinh"
+                },
+                {
+                    "to": "/class-list",
+                    "label": "Danh sách lớp"
+                },
+                {
+                    "to": "/teacher-schedule",
+                    "label": "Lịch dạy"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "display": [
+                {
+                    "to": "/home",
+                    "label": "Trang chủ"
+                },
+                {
+                    "to": "/grade",
+                    "label": "Điểm số"
+                },
+                {
+                    "to": "/schedule",
+                    "label": "Thời khóa biểu"
+                },
+                {
+                    "to": "/input-student",
+                    "label": "Thêm học sinh"
+                },
+                {
+                    "to": "/class-list",
+                    "label": "Danh sách lớp"
+                },
+                {
+                    "to": "/teacher-list",
+                    "label": "Danh sách giáo viên"
+                },
+                {
+                    "to": "/teacher-schedule",
+                    "label": "Lịch dạy"
+                },
+                {
+                    "to": "/rule",
+                    "label": "Quy định"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "display": [
+                {
+                    "to": "/about",
+                    "label": "Thông tin "
+                },
+                {
+                    "to": "/grade",
+                    "label": "Điểm số"
+                },
+                {
+                    "to": "/schedule",
+                    "label": "Thời khóa biểu"
+                }
+            ]
+        }
+    ],
+    "account": [
+        {
+            "id": 123,
+            "password": "123",
+            "role": 2
+        },
+        {
+            "id": 456,
+            "password": "456",
+            "role": 2
+        },
+        {
+            "id": 789,
+            "password": "789",
+            "role": 2
+        },
+        {
+            "id": 633,
+            "password": "633",
+            "role": 0
+        },
+        {
+            "id": 555,
+            "password": "555",
+            "role": 1
+        }
+    ],
+    "info": [
+        {
+            "id": 123,
+            "role": "student",
+            "name": "Vien Hai Yen",
+            "birthday": "23/01/2002",
+            "address": "227 NCV Q5, TPHCM",
+            "gender": "female",
+            "mail": "20120633@student.hcmus.edu.vn",
+            "phone": "012345689",
+            "subject": null
+        },
+        {
+            "id": 456,
+            "role": "student",
+            "name": "Le Minh Tri",
+            "birthday": "23/01/2002",
+            "address": "227 NCV Q5, TPHCM",
+            "gender": "male",
+            "mail": "20120634@student.hcmus.edu.vn",
+            "phone": "012345689",
+            "subject": null
+        },
+        {
+            "id": 789,
+            "role": "student",
+            "name": "Ngo Quang Hung",
+            "birthday": "23/01/2002",
+            "address": "227 NCV Q5, TPHCM",
+            "gender": "male",
+            "mail": "20120095@student.hcmus.edu.vn",
+            "phone": "012345689",
+            "subject": null
+        },
+        {
+            "id": 633,
+            "role": "teacher",
+            "name": "Pham Phuoc Sang",
+            "birthday": "23/01/2002",
+            "address": "227 NCV Q5, TPHCM",
+            "gender": "male",
+            "mail": "20120095@student.hcmus.edu.vn",
+            "phone": "012345689",
+            "subject": "Math"
+        },
+        {
+            "id": 765,
+            "role": "teacher",
+            "name": "Nguyen tran ngoc suong",
+            "birthday": "23/01/2002",
+            "address": "227 NCV Q5, TPHCM",
+            "gender": "male",
+            "mail": "20120095@student.hcmus.edu.vn",
+            "phone": "012345689",
+            "subject": "Math"
+        },
+        {
+            "id": 555,
+            "role": "admin",
+            "name": "Nguyen thi admin",
+            "birthday": "23/01/2002",
+            "address": "227 NCV Q5, TPHCM",
+            "gender": "female",
+            "mail": "20120095@student.hcmus.edu.vn",
+            "phone": "012345689",
+            "subject": null
+        }
+    ],
+    "nienkhoa": [
+        {
+            "nam": "2019-2020",
+            "hk": 1,
+            "nid": 19201
+        },
+        {
+            "nam": "2019-2020",
+            "hk": 2,
+            "nid": 19202
+        },
+        {
+            "nam": "2020-2021",
+            "hk": 1,
+            "nid": 20211
+        },
+        {
+            "nam": "2020-2021",
+            "hk": 2,
+            "nid": 20212
+        }
+    ],
+    "schedule-teacher": [
+        {
+            "nid": 19201,
+            "schedule": [
+                {
+                    "id": 633,
+                    "tkb": [
+                        [
+                            "9a1",
+                            "9a1",
+                            null,
+                            "6a4",
+                            null,
+                            null,
+                            "7a5"
+                        ],
+                        [
+                            "7a5",
+                            "7a5",
+                            "9a3",
+                            "6a4",
+                            null,
+                            null,
+                            "null"
+                        ],
+                        [
+                            "9a1",
+                            "9a1",
+                            null,
+                            "6a4",
+                            null,
+                            null,
+                            "7a5"
+                        ],
+                        [
+                            "9a1",
+                            "9a1",
+                            null,
+                            "6a4",
+                            null,
+                            null,
+                            "7a5"
+                        ],
+                        [
+                            "9a1",
+                            "9a1",
+                            null,
+                            "6a4",
+                            null,
+                            null,
+                            "7a5"
+                        ]
+                    ]
+                }
+            ]
+        }
+    ],
+    "class": [
+        {
+            "nid": "19201",
+            "classlist": [
+                {
+                    "id": "c95",
+                    "className": "9a5",
+                    "members": [
+                        123,
+                        456,
+                        789
+                    ]
+                },
+                {
+                    "id": "c95",
+                    "className": "9a5",
+                    "members": [
+                        123,
+                        456,
+                        789
+                    ]
+                },
+                {
+                    "id": "c62",
+                    "className": "6a2",
+                    "members": [
+                        123,
+                        456,
+                        789
+                    ]
+                },
+                {
+                    "id": "7a1",
+                    "members": [
+                        123,
+                        456,
+                        789
+                    ]
+                }
+            ]
+        }
+    ],
+    "grade": [
+        {
+            "nid": "19201",
+            "point": [
+                {
+                    "id": 123,
+                    "result": {
+                        "Toan": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "Van": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "Anh": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "Li": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "Hoa": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "Sinh": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "Su": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "Dia": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "GDCD": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "CongNghe": {
+                            "mieng": 10,
+                            "_15": 10,
+                            "_45": 10,
+                            "_gk": 10,
+                            "_ck": 10
+                        },
+                        "TD": "D"
+                    }
+                },
+                {
+                    "id": 456,
+                    "result": {
+                        "Toan": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "Van": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "Anh": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "Li": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "Hoa": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "Sinh": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "Su": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "Dia": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "GDCD": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "CongNghe": {
+                            "mieng": 9,
+                            "_15": 9,
+                            "_45": 9,
+                            "_gk": 9,
+                            "_ck": 9
+                        },
+                        "TD": "D"
+                    }
+                },
+                {
+                    "id": 789,
+                    "result": {
+                        "Toan": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "Van": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "Anh": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "Li": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "Hoa": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "Sinh": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "Su": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "Dia": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "GDCD": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "CongNghe": {
+                            "mieng": 8,
+                            "_15": 8,
+                            "_45": 8,
+                            "_gk": 8,
+                            "_ck": 8
+                        },
+                        "TD": "D"
+                    }
+                }
+            ]
+        }
+    ],
+    "rule": [
+        {
+            "nid": 19201,
+            "numberstudent": [
+                25,
+                38
+            ],
+            "numberofclass": 10,
+            "age": [
+                10,
+                15
+            ]
+        },
+        {
+            "nid": 19202,
+            "numberstudent": [
+                25,
+                38
+            ],
+            "numberofclass": 10,
+            "age": [
+                10,
+                15
+            ]
+        },
+        {
+            "nid": 20211,
+            "numberstudent": [
+                25,
+                38
+            ],
+            "numberofclass": 10,
+            "age": [
+                10,
+                15
+            ]
+        },
+        {
+            "nid": 20212,
+            "numberstudent": [
+                25,
+                38
+            ],
+            "numberofclass": 10,
+            "age": [
+                10,
+                15
+            ]
+        }
+    ]
+}
