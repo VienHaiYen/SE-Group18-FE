@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 function UserLayout({ children }) {
-    let role = 1;
+    let role = 0;
     const [navs, setNavs] = useState([]);
     useEffect(() => {
         setNavInRules();
