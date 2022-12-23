@@ -1,14 +1,13 @@
 import './App.css';
-// import { UserLayout } from '~/layouts';
-import UserLayout from './layouts';
+import { DefaultLayout, UserLayout } from '~/layouts';
 
 
 function App() {
   return (
     <div className="App">
-      <UserLayout>
+      <DefaultLayout>
         <h1>REQUIRED PAGE </h1>
-      </UserLayout>
+      </DefaultLayout>
     </div>
   );
 }
