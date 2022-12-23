@@ -1,18 +1,17 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-function Header() {
-    var navItems = [
-        { to: '/home', label: 'Trang chủ - admin' },
-        { to: '/about', label: 'Thông tin - mn ' },
-        { to: '/grade', label: 'Điểm số - mn' },
-        { to: '/schedule', label: 'Thời khóa biểu - mn' },
-        { to: '/input-grade', label: 'Nhập điểm cho học sinh - gv' },
-        { to: '/input-student', label: 'Thêm học sinh - ad' },
-        { to: '/class-list', label: 'Danh sách lớp - ad, gv' },
-        { to: '/teacher-schedule', label: 'Lịch dạy - ad, gv' },
-        { to: '/rule', label: 'Quy định - ad' },
-    ];
-
+function Header({ navItems }) {
+    // var navItems = [
+    //     { to: '/home', label: 'Trang chủ - admin' },
+    //     { to: '/about', label: 'Thông tin - mn ' },
+    //     { to: '/grade', label: 'Điểm số - mn' },
+    //     { to: '/schedule', label: 'Thời khóa biểu - mn' },
+    //     { to: '/input-grade', label: 'Nhập điểm cho học sinh - gv' },
+    //     { to: '/input-student', label: 'Thêm học sinh - ad' },
+    //     { to: '/class-list', label: 'Danh sách lớp - ad, gv' },
+    //     { to: '/teacher-schedule', label: 'Lịch dạy - ad, gv' },
+    //     { to: '/rule', label: 'Quy định - ad' },
+    // ];
     return (
         <div className="vertical-nav bg-white border" style={{ minWidth: '250px' }} id="sidebar">
             <div className="py-4 px-3 bg-light">
@@ -39,7 +38,6 @@ function Header() {
                     </li>
                 ))}
             </ul>
-
             <p className="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
         </div>
     );
