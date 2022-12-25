@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-function Header({ navItems }) {
+function Header({ navItems, userInfo }) {
     // var navItems = [
     //     { to: '/home', label: 'Trang chủ - admin' },
     //     { to: '/about', label: 'Thông tin - mn ' },
@@ -23,8 +23,8 @@ function Header({ navItems }) {
                         className="mr-3 rounded-circle img-thumbnail shadow-sm"
                     />
                     <div className="media-body">
-                        <h4 className="m-0">Hai Yen Vien</h4>
-                        <p className="font-weight-light text-muted mb-0">Web gamo</p>
+                        <h4 className="m-0">{userInfo.name}</h4>
+                        <p className="font-weight-light text-muted mb-0">{userInfo.role}</p>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ function Header({ navItems }) {
                     </li>
                 ))}
             </ul>
-            <p className="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
+            {/* <p className="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p> */}
         </div>
     );
 }

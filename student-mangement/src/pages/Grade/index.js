@@ -1,7 +1,7 @@
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import { useState } from 'react';
 
-let isStudent = false;
+let isStudent = true;
 function Grade() {
     let studentsMathGrades = [
         {
@@ -76,22 +76,24 @@ function Grade() {
             _finalterm: 9.4,
         },
     ];
-    const [findingState, setFindingState] = useState(true);
+    const [findingState, setFindingState] = useState(!isStudent);
     return (
         <>
             <div className="row">
                 <h2 className="mr-5">Tra cứu điểm số</h2>
-                <BootstrapSwitchButton
-                    id="switch-button"
-                    checked={findingState}
-                    onstyle="dark"
-                    onlabel="Theo DS lớp"
-                    offlabel="MSHS"
-                    width="150"
-                    onChange={() => {
-                        setFindingState(!findingState);
-                    }}
-                />
+                {!isStudent && (
+                    <BootstrapSwitchButton
+                        id="switch-button"
+                        checked={findingState}
+                        onstyle="dark"
+                        onlabel="Theo DS lớp"
+                        offlabel="MSHS"
+                        width="150"
+                        onChange={() => {
+                            setFindingState(!findingState);
+                        }}
+                    />
+                )}
             </div>
             {!findingState && (
                 <>
@@ -147,7 +149,7 @@ function Grade() {
                                 className="btn btn-secondary"
                                 style={{ height: '40px', marginLeft: '20px', marginBottom: '1rem' }}
                             >
-                                Tra cứu
+                                Tìm kiếm
                             </button>
                         </div>
                     </form>
@@ -190,12 +192,12 @@ function Grade() {
                                 <input type="text" className=" form-control" id="inputEmail4" placeholder="Tên lớp" />
                             </div>
                             <div className="form-group mr-3">
-                                <label htmlFor="inputPassword4">Giáo viên chủ nhiệm</label>
+                                <label htmlFor="inputPassword4">Giáo viên bộ môn</label>
                                 <input
                                     type="text"
                                     className="form-control"
                                     id="inputPassword4"
-                                    placeholder="--Giáo viên chủ nhiệm--"
+                                    placeholder="--Giáo viên bộ môn--"
                                     disabled
                                 />
                             </div>

@@ -3,7 +3,11 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 function UserLayout({ children }) {
-    let role = 1;
+    let role = 2;
+    let user = {
+        name: 'Hai Yen',
+        role: 'student',
+    };
     const [navs, setNavs] = useState([]);
     useEffect(() => {
         setNavInRules();
@@ -17,7 +21,7 @@ function UserLayout({ children }) {
     };
     return (
         <div className="d-flex ">
-            <Header navItems={navs} />
+            <Header navItems={navs} userInfo={user} />
             <div className="p-5" style={{ width: '100%' }}>
                 {children}
             </div>
