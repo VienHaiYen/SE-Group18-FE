@@ -11,7 +11,7 @@ import {
     TeacherSchedule,
     Rule,
     TeacherList,
-} from '~/pages';
+} from '../pages';
 
 export const publicRoutes = [{ path: '/', component: LogIn }];
 //dùng cho các trang phải đăng nhập

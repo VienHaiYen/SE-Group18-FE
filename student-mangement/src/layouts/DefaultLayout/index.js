@@ -1,37 +1,57 @@
 import React from 'react';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { useNavigate } from 'react-router-dom';
 
-function DefaultLayout({ children }) {
+function DefaultLayout({ children, setLogin }) {
+    let navigate = useNavigate();
+
     let object = {
-        username: '',
+        id: '',
         password: '',
-        role: 2,
+        role: 'student',
     };
-    const setAccount = (username, password) => {
-        object.username = username;
+    const setAccount = (id, password) => {
+        object.id = id;
         object.password = password;
-        handleLogin(username, password);
+        handleLogin();
     };
     const setRole = (role) => {
         object.role = role;
+        console.log(object.role);
     };
-    const fetchAccount = async (id) => {
-        let res = await fetch(`http://localhost:5000/account/${id}`);
-        if (res.ok) {
-            return await res.json();
+    const fetchAccount = async (id, password, role) => {
+        let res = await fetch('http://localhost:55000/login', {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify({ id: id, password: password, role: role }),
+        });
+        let data = await res.json();
+        if (data !== undefined) {
+            return data;
         } else {
             return null;
         }
     };
-    const handleLogin = async (username, password) => {
-        let account = await fetchAccount(username);
-        if (account == null || account.password !== password || account.role !== object.role) {
-            alert('Sai tài khoản hoặc mật khẩu');
-            console.log(account.role === object.role);
-        } else if (account.password === password && account.role === object.role) {
-            alert('da dang nhap');
-            window.location.href = '/home';
+    const handleLogin = async () => {
+        let account = await fetchAccount(object.id, object.password, object.role);
+        if (account !== null) {
+            let name = account.name;
+            let path = account.display[0];
+            let info = {
+                isLogin: true,
+                id: object.id,
+                role: object.role,
+                name: name,
+                path: path,
+            };
+            console.log(path[0].to);
+            navigate(path[0].to);
+            setLogin(info);
         }
     };
     return (
