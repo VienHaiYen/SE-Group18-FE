@@ -2,18 +2,16 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function UserLayout({ children, loginState }) {
-    let navigate = useNavigate();
-    let role = 2;
+    // let navigate = useNavigate();
     const [navs, setNavs] = useState([]);
     const [user, setUser] = useState({
         name: '',
         role: '',
     });
     useEffect(() => {
-        console.log(loginState);
         setNavs(loginState.path);
         setUser({
             name: loginState.name,

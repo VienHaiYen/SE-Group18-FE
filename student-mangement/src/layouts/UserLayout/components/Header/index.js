@@ -1,17 +1,6 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 function Header({ navItems, userInfo }) {
-    // var navItems = [
-    //     { to: '/home', label: 'Trang chủ - admin' },
-    //     { to: '/about', label: 'Thông tin - mn ' },
-    //     { to: '/grade', label: 'Điểm số - mn' },
-    //     { to: '/schedule', label: 'Thời khóa biểu - mn' },
-    //     { to: '/input-grade', label: 'Nhập điểm cho học sinh - gv' },
-    //     { to: '/input-student', label: 'Thêm học sinh - ad' },
-    //     { to: '/class-list', label: 'Danh sách lớp - ad, gv' },
-    //     { to: '/teacher-schedule', label: 'Lịch dạy - ad, gv' },
-    //     { to: '/rule', label: 'Quy định - ad' },
-    // ];
     return (
         <div className="vertical-nav bg-white border" style={{ minWidth: '250px' }} id="sidebar">
             <div className="py-4 px-3 bg-light">

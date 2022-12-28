@@ -19,7 +19,6 @@ function Schedule() {
                 newArray[i][j] = array[j][i];
             }
         }
-        console.log(newArray);
         return newArray;
     }
     return (
@@ -103,8 +102,8 @@ function Schedule() {
                     {transposeArray(schedule, 7).map((row, index) =>
                         index === 4 ? (
                             <>
-                                <br />
-                                <tr>
+                                <tr key={-1}></tr>
+                                <tr key={index}>
                                     <th scope="col">{index + 1}</th>
                                     <td>{row[0]}</td>
                                     <td>{row[1]}</td>
@@ -114,7 +113,7 @@ function Schedule() {
                                 </tr>
                             </>
                         ) : (
-                            <tr>
+                            <tr key={index}>
                                 <th scope="col">{index + 1}</th>
                                 <td>{row[0]}</td>
                                 <td>{row[1]}</td>
