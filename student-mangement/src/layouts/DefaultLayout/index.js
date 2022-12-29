@@ -1,28 +1,34 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { useNavigate } from 'react-router-dom';
 
 function DefaultLayout({ children, setLogin }) {
     let navigate = useNavigate();
+    const [role, setRole] = useState('student');
 
     let object = {
         id: '',
         password: '',
-        role: 'student',
+        role: '',
     };
     const setAccount = (id, password) => {
         object.id = id;
         object.password = password;
+        object.role = role;
         handleLogin();
     };
-    const setRole = (role) => {
-        object.role = role;
-        console.log(object.role);
+    const setRoleNav = (role) => {
+        setRole(role);
+        console.log(role);
     };
 
     const fetchAccount = async (id, password, role) => {
+        if (role === '') {
+            role = 'student';
+        }
+        console.log('teeeeeew', id, password, role);
         let res = await fetch('http://localhost:55000/login', {
             headers: {
                 Accept: 'application/json',
@@ -42,11 +48,10 @@ function DefaultLayout({ children, setLogin }) {
     };
 
     const handleLogin = async () => {
+        console.log(456789, object);
         let account = await fetchAccount(object.id, object.password, object.role);
 
-        // let tmpdata = await Promise(account);
         let tmpdata = account;
-        console.log(tmpdata);
         localStorage.setItem('sid', tmpdata.sid);
 
         if (account !== null) {
@@ -68,7 +73,7 @@ function DefaultLayout({ children, setLogin }) {
     };
     return (
         <>
-            <Header setRole={setRole} />
+            <Header setRole={setRoleNav} />
             <div className="d-flex align-items-center justify-content-center">
                 {React.cloneElement(children, { submit: setAccount })}
             </div>

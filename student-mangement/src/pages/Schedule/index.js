@@ -14,7 +14,7 @@ function Schedule() {
         for (var i = 0; i < arrayLength; i++) {
             newArray.push(new Array(array.length));
         }
-        for (var i = 0; i < newArray.length; i++) {
+        for (i = 0; i < newArray.length; i++) {
             for (var j = 0; j < array.length; j++) {
                 newArray[i][j] = array[j][i];
             }

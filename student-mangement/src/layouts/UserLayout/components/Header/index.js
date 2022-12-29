@@ -1,6 +1,24 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 function Header({ navItems, userInfo }) {
+    let navigate = useNavigate();
+    const handleLogout = async () => {
+        let res = await fetch('http://localhost:55000/logout', {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Cache: 'no-cache',
+                sid: localStorage.getItem('sid'),
+            },
+            method: 'POST',
+        });
+        let data = await res.json();
+        if (data !== undefined) {
+            console.log(data);
+            navigate('/');
+            return data;
+        }
+    };
     return (
         <div className="vertical-nav bg-white border" style={{ minWidth: '250px' }} id="sidebar">
             <div className="py-4 px-3 bg-light">
@@ -28,6 +46,11 @@ function Header({ navItems, userInfo }) {
                 ))}
             </ul>
             {/* <p className="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p> */}
+            <div className="text-center">
+                <button type="button" class="btn btn-outline-secondary" onClick={handleLogout}>
+                    Đăng xuất
+                </button>
+            </div>
         </div>
     );
 }
