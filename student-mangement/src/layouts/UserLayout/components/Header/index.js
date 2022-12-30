@@ -47,7 +47,7 @@ function Header({ navItems, userInfo }) {
             </ul>
             {/* <p className="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p> */}
             <div className="text-center">
-                <button type="button" class="btn btn-outline-secondary" onClick={handleLogout}>
+                <button type="button" className="btn btn-outline-secondary" onClick={handleLogout}>
                     Đăng xuất
                 </button>
             </div>

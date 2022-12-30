@@ -1,3 +1,4 @@
+//đừng làm nữa
 import { useState, useEffect } from 'react';
 function TeacherList() {
     const [teachers, setTeacher] = useState([]);
@@ -28,10 +29,10 @@ function TeacherList() {
                             <option defaultValue disabled>
                                 --Năm học--
                             </option>
-                            <option>2019-2020</option>
-                            <option>2020-2021</option>
-                            <option>2021-2022</option>
-                            <option>2022-2023</option>
+                            <option value={2223}>2022-2023</option>
+                            <option value={2122}>2021-2022</option>
+                            <option value={2021}>2020-2021</option>
+                            <option value={1920}>2019-2020</option>
                         </select>
                     </div>
                     <div className="form-group mr-3">

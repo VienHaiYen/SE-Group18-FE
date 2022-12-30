@@ -1,4 +1,12 @@
-function classNameList() {
+import { useEffect, useState } from 'react';
+function ClassList() {
+    const [classID, setClassID] = useState(0);
+    const [classList, setClassList] = useState([]);
+    const [classIdList, setClassIdList] = useState();
+    const [classMembers, setClassMembers] = useState([]);
+    const [year, setYear] = useState(2223);
+    const [term, setTerm] = useState(1);
+    const [students, setStudents] = useState([]);
     let studentList = [
         {
             id: 20120633,
@@ -29,6 +37,115 @@ function classNameList() {
             sdt: '0792905933',
         },
     ];
+    useEffect(() => {
+        hdBB();
+    }, [classMembers]);
+    useEffect(() => {
+        // Load danh sach lop moi lan onMouse
+        let nid = handleNId(year, term);
+        const fetchClassList = async () => {
+            let info = await fetch(`http://localhost:55000/api/class-list?nid=${nid}`, {
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Cache: 'no-cache',
+                    sid: localStorage.getItem('sid'),
+                },
+                method: 'GET',
+            });
+            if (info.status !== 200) {
+                alert('Khoong lay data ve duoc');
+            }
+            let data = await info.json();
+            console.log('ahihi do ngoc', data);
+            return data;
+        };
+        const handleGetClassList = async () => {
+            let data = await fetchClassList();
+            setClassList(data);
+            // data = data.reduce((acc, data) => {
+            //     return [...acc, { id: data._id, headteacher: data.headteacher }];
+            // }, []);
+            // console.log('danh sach tat ca cac lop', data);
+            // setClassIdList(data);
+        };
+        handleGetClassList();
+    }, [term, year]);
+    const handleNId = (year, term) => {
+        let nid = year * 10 + term;
+        return nid.toString();
+    };
+    //ham lay thong tin moi hoc sinh
+    const fetchUser = async (id) => {
+        console.log('idonnow');
+        let info2 = await fetch(`http://localhost:55000/api/about/${id}`, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Cache: 'no-cache',
+                sid: localStorage.getItem('sid'),
+            },
+            method: 'GET',
+        });
+
+        let data = await info2.json();
+
+        return data;
+    };
+    const handleLoadUser = async (id) => {
+        let data = await fetchUser(id);
+        console.log(data);
+        return data;
+    };
+
+    const handleGetClass = (e) => {
+        e.preventDefault();
+        let nid = handleNId(year, term);
+        // const fetchUser = async () => {
+        //     let id = classID === '' ? '' : '&id=' + classID;
+        //     let info2 = await fetch(`http://localhost:55000/api/class-list?nid=${nid}${id}`, {
+        //         headers: {
+        //             Accept: 'application/json',
+        //             'Content-Type': 'application/json',
+        //             Cache: 'no-cache',
+        //             sid: localStorage.getItem('sid'),
+        //         },
+        //         method: 'GET',
+        //     });
+        //     if (info2.status !== 200) {
+        //         alert('khong lay duoc gi nha');
+        //         return null;
+        //     }
+        //     let data = await info2.json();
+        //     return data;
+        // };
+        const handleLoad = async () => {
+            // let data = await fetchUser();
+            let data = classList[classID];
+            if (!data) {
+                alert('Khong ton tai lop nay');
+                return;
+            }
+            console.log(789, data);
+            setClassMembers(data.members);
+        };
+        handleLoad();
+    };
+    async function fetchAbout(userIds) {
+        const person = userIds.map(async (id) => {
+            const user = await fetchUser(id);
+            return user;
+        });
+        const users = await Promise.all(person);
+        return users;
+    }
+    const hdBB = async () => {
+        let abc = await fetchAbout(classMembers);
+        console.log('hiuhiu', abc);
+        setStudents(abc);
+        return abc;
+    };
+
     return (
         <>
             <form>
@@ -36,7 +153,24 @@ function classNameList() {
                 <div className="form-row align-items-end">
                     <div className="form-group mr-3">
                         <label htmlFor="inputEmail4">Tên lớp</label>
-                        <input type="text" className=" form-control" id="inputEmail4" placeholder="Tên lớp" />
+                        <select id="yearID" className="form-control" onChange={(e) => setClassID(e.target.value)}>
+                            <option defaultValue disabled>
+                                --Ten lop--
+                            </option>
+                            {classList.map((cid, index) => {
+                                return <option value={index}>{cid._id}</option>;
+                            })}
+                        </select>
+                        <input
+                            type="text"
+                            className=" form-control"
+                            id="inputEmail4"
+                            placeholder="Tên lớp"
+                            value={classID}
+                            onChange={(e) => {
+                                setClassID(e.target.value);
+                            }}
+                        />
                     </div>
                     <div className="form-group mr-3">
                         <label htmlFor="inputPassword4">Giáo viên chủ nhiệm</label>
@@ -49,31 +183,32 @@ function classNameList() {
                         />
                     </div>
                     <div className="form-group mr-3">
-                        <label htmlFor="inputState">Năm học</label>
-                        <select id="inputState" className="form-control">
+                        <label htmlFor="yearID">Năm học</label>
+                        <select id="yearID" className="form-control" onChange={(e) => setYear(e.target.value)}>
                             <option defaultValue disabled>
                                 --Năm học--
                             </option>
-                            <option>2019-2020</option>
-                            <option>2020-2021</option>
-                            <option>2021-2022</option>
-                            <option>2022-2023</option>
+                            <option value={2223}>2022-2023</option>
+                            <option value={2122}>2021-2022</option>
+                            <option value={2021}>2020-2021</option>
+                            <option value={1920}>2019-2020</option>
                         </select>
                     </div>
                     <div className="form-group mr-3">
-                        <label htmlFor="inputState">Học kì</label>
-                        <select id="inputState" className="form-control">
+                        <label htmlFor="termID">Học kì</label>
+                        <select id="termID" className="form-control" onChange={(e) => setTerm(e.target.value)}>
                             <option defaultValue disabled>
                                 --Học kì--
                             </option>
-                            <option>Học kì 1</option>
-                            <option>Học kì 2</option>
+                            <option value={1}>Học kì 1</option>
+                            <option value={2}>Học kì 2</option>
                         </select>
                     </div>
                     <button
                         type="submit"
                         className="btn btn-secondary"
                         style={{ height: '40px', marginLeft: '20px', marginBottom: '1rem' }}
+                        onClick={handleGetClass}
                     >
                         Tra cứu
                     </button>
@@ -91,14 +226,14 @@ function classNameList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {studentList.map((grade, index) => (
+                    {students.map((info, index) => (
                         <tr key={index}>
                             <th scope="row">{index}</th>
-                            <td>{grade.id}</td>
-                            <td>{grade.name}</td>
-                            <td>{grade.gender}</td>
-                            <td>{grade.birthday}</td>
-                            <td>{grade.sdt}</td>
+                            <td>{info.id}</td>
+                            <td>{info.name}</td>
+                            <td>{info.gender}</td>
+                            <td>{info.birthday}</td>
+                            <td>{info.sdt}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -107,4 +242,4 @@ function classNameList() {
     );
 }
 
-export default classNameList;
+export default ClassList;

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function DefaultLayout({ children, setLogin }) {
     let navigate = useNavigate();
-    const [role, setRole] = useState('student');
+    const [role, setRole] = useState('admin');
 
     let object = {
         id: '',
@@ -25,10 +25,6 @@ function DefaultLayout({ children, setLogin }) {
     };
 
     const fetchAccount = async (id, password, role) => {
-        if (role === '') {
-            role = 'student';
-        }
-        console.log('teeeeeew', id, password, role);
         let res = await fetch('http://localhost:55000/login', {
             headers: {
                 Accept: 'application/json',
@@ -38,8 +34,10 @@ function DefaultLayout({ children, setLogin }) {
             method: 'POST',
             body: JSON.stringify({ id: id, password: password, role: role }),
         });
+        console.log('teeeeeew', id, password, role);
         let data = await res.json();
         if (data !== undefined) {
+            console.log(data);
             return data;
         } else {
             alert('Tài khoản hoặc mật khẩu không đúng, vui lòng thử lại');
