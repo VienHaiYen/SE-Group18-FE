@@ -6,7 +6,7 @@ import { publicRoutes, privateRoutes } from './routes';
 
 function App() {
     const [loginState, setLoginState] = useState({
-        isLogin: false,
+        isLogin: true,
         id: '',
         role: '',
         name: '',

@@ -23,6 +23,11 @@ function InputStudent() {
     };
     const [findingState, setFindingState] = useState(true);
     const fetchInput = async () => {
+        let tmp = new Date(info['birthday']);
+
+        let temp =
+            ('0' + tmp.getDate()).slice(-2) + '/' + ('0' + (tmp.getMonth() + 1)).slice(-2) + '/' + tmp.getFullYear();
+        console.log(456, temp);
         let res = await fetch('http://localhost:55000/api/input-student', {
             headers: {
                 Accept: 'application/json',
@@ -33,7 +38,7 @@ function InputStudent() {
             method: 'POST',
             body: JSON.stringify({
                 name: info.name,
-                birthday: info.birthday,
+                birthday: temp,
                 address: info.address,
                 gender: info.gender,
                 mail: info.mail,
@@ -42,9 +47,9 @@ function InputStudent() {
                 subject: info.subject,
             }),
         });
-        // console.log('teeeeeew', id, password, role);
         let data = await res.json();
-        if (data.status !== 200) {
+        console.log('teeeeeew', data);
+        if (data.status === 200) {
             console.log(data);
             return data;
         } else {

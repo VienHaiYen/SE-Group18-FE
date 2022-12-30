@@ -41,7 +41,6 @@ function ClassList() {
     };
     //ham lay thong tin moi hoc sinh
     const fetchUser = async (id) => {
-        console.log('idonnow');
         let info = await fetch(`http://localhost:55000/api/about/${id}`, {
             headers: {
                 Accept: 'application/json',
@@ -162,16 +161,17 @@ function ClassList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {students.map((info, index) => (
-                        <tr key={index}>
-                            <th scope="row">{index}</th>
-                            <td>{info.id}</td>
-                            <td>{info.name}</td>
-                            <td>{info.gender}</td>
-                            <td>{info.birthday}</td>
-                            <td>{info.phone}</td>
-                        </tr>
-                    ))}
+                    {students &&
+                        students.map((info, index) => (
+                            <tr key={index}>
+                                <th scope="row">{index}</th>
+                                <td>{info.id}</td>
+                                <td>{info.name}</td>
+                                <td>{info.gender}</td>
+                                <td>{info.birthday}</td>
+                                <td>{info.phone}</td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
         </>
