@@ -77,6 +77,7 @@ function Grade() {
         },
     ];
     const [studentGrade, setStudentGrade] = useState();
+    const [classGrade, setClassGrade] = useState();
     const [year, setYear] = useState(2223);
     const [term, setTerm] = useState(1);
     const [ID, setId] = useState();
