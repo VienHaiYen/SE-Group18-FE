@@ -2,43 +2,13 @@ import { useEffect, useState } from 'react';
 function ClassList() {
     const [classID, setClassID] = useState(0);
     const [classList, setClassList] = useState([]);
-    const [classIdList, setClassIdList] = useState();
     const [classMembers, setClassMembers] = useState([]);
     const [year, setYear] = useState(2223);
     const [term, setTerm] = useState(1);
     const [students, setStudents] = useState([]);
-    let studentList = [
-        {
-            id: 20120633,
-            name: 'hyenn',
-            gender: 'male',
-            birthday: '23/01/2002',
-            sdt: '0792905933',
-        },
-        {
-            id: 20120633,
-            name: 'qhung',
-            gender: 'male',
-            birthday: '23/01/2002',
-            sdt: '0792905933',
-        },
-        {
-            id: 20120633,
-            name: 'mtri',
-            gender: 'male',
-            birthday: '23/01/2002',
-            sdt: '0792905933',
-        },
-        {
-            id: 20120633,
-            name: 'ppsang',
-            gender: 'male',
-            birthday: '23/01/2002',
-            sdt: '0792905933',
-        },
-    ];
+
     useEffect(() => {
-        hdBB();
+        handleFetchAllStudentInfo();
     }, [classMembers]);
     useEffect(() => {
         // Load danh sach lop moi lan onMouse
@@ -54,20 +24,14 @@ function ClassList() {
                 method: 'GET',
             });
             if (info.status !== 200) {
-                alert('Khoong lay data ve duoc');
+                alert('Khong lay data ve duoc');
             }
             let data = await info.json();
-            console.log('ahihi do ngoc', data);
             return data;
         };
         const handleGetClassList = async () => {
             let data = await fetchClassList();
             setClassList(data);
-            // data = data.reduce((acc, data) => {
-            //     return [...acc, { id: data._id, headteacher: data.headteacher }];
-            // }, []);
-            // console.log('danh sach tat ca cac lop', data);
-            // setClassIdList(data);
         };
         handleGetClassList();
     }, [term, year]);
@@ -78,7 +42,7 @@ function ClassList() {
     //ham lay thong tin moi hoc sinh
     const fetchUser = async (id) => {
         console.log('idonnow');
-        let info2 = await fetch(`http://localhost:55000/api/about/${id}`, {
+        let info = await fetch(`http://localhost:55000/api/about/${id}`, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -87,51 +51,24 @@ function ClassList() {
             },
             method: 'GET',
         });
+        if (info.status !== 200) {
+            alert('Khong lay data ve duoc');
+        }
+        let data = await info.json();
 
-        let data = await info2.json();
-
-        return data;
-    };
-    const handleLoadUser = async (id) => {
-        let data = await fetchUser(id);
-        console.log(data);
         return data;
     };
 
     const handleGetClass = (e) => {
         e.preventDefault();
-        let nid = handleNId(year, term);
-        // const fetchUser = async () => {
-        //     let id = classID === '' ? '' : '&id=' + classID;
-        //     let info2 = await fetch(`http://localhost:55000/api/class-list?nid=${nid}${id}`, {
-        //         headers: {
-        //             Accept: 'application/json',
-        //             'Content-Type': 'application/json',
-        //             Cache: 'no-cache',
-        //             sid: localStorage.getItem('sid'),
-        //         },
-        //         method: 'GET',
-        //     });
-        //     if (info2.status !== 200) {
-        //         alert('khong lay duoc gi nha');
-        //         return null;
-        //     }
-        //     let data = await info2.json();
-        //     return data;
-        // };
-        const handleLoad = async () => {
-            // let data = await fetchUser();
-            let data = classList[classID];
-            if (!data) {
-                alert('Khong ton tai lop nay');
-                return;
-            }
-            console.log(789, data);
-            setClassMembers(data.members);
-        };
-        handleLoad();
+        let data = classList[classID];
+        if (!data) {
+            alert('Khong ton tai lop nay');
+            return;
+        }
+        setClassMembers(data.members);
     };
-    async function fetchAbout(userIds) {
+    async function fetchInfo(userIds) {
         const person = userIds.map(async (id) => {
             const user = await fetchUser(id);
             return user;
@@ -139,9 +76,8 @@ function ClassList() {
         const users = await Promise.all(person);
         return users;
     }
-    const hdBB = async () => {
-        let abc = await fetchAbout(classMembers);
-        console.log('hiuhiu', abc);
+    const handleFetchAllStudentInfo = async () => {
+        let abc = await fetchInfo(classMembers);
         setStudents(abc);
         return abc;
     };
@@ -233,7 +169,7 @@ function ClassList() {
                             <td>{info.name}</td>
                             <td>{info.gender}</td>
                             <td>{info.birthday}</td>
-                            <td>{info.sdt}</td>
+                            <td>{info.phone}</td>
                         </tr>
                     ))}
                 </tbody>

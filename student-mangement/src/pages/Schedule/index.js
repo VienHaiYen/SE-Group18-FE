@@ -1,5 +1,6 @@
 // check commit
-function Schedule() {
+function Schedule({ id, role }) {
+    let isStudent = role === 'student';
     let schedule = [
         ['Chào cờ', 'Toán', 'Toán', 'Anh', 'Lý', 'Thể dục', 'Sử'],
         ['Công nghệ', 'Công nghệ', 'Thẻ dục', 'Tự học', 'Sinh', 'Văn', 'Văn'],
@@ -8,7 +9,6 @@ function Schedule() {
         ['Lý', 'Toán', 'Toán', 'Hóa', 'Sinh', 'Văn', null],
     ];
 
-    let isStudent = false;
     function transposeArray(array, arrayLength) {
         var newArray = [];
         for (var i = 0; i < arrayLength; i++) {

@@ -46,7 +46,6 @@ function DefaultLayout({ children, setLogin }) {
     };
 
     const handleLogin = async () => {
-        console.log(456789, object);
         let account = await fetchAccount(object.id, object.password, object.role);
 
         let tmpdata = account;

@@ -1,8 +1,12 @@
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import { useState, useEffect } from 'react';
 
-let isStudent = false;
-function Grade() {
+function Grade({ id, role }) {
+    useEffect(() => {
+        console.log('run run run');
+        setId(id);
+    }, []);
+    let isStudent = role === 'student';
     let studentsMathGrades = [
         {
             id: 20120633,
@@ -80,7 +84,7 @@ function Grade() {
     const [classGrade, setClassGrade] = useState();
     const [year, setYear] = useState(2223);
     const [term, setTerm] = useState(1);
-    const [ID, setId] = useState();
+    const [ID, setId] = useState('');
     const handleNId = (year, term) => {
         let nid = year * 10 + term;
         return nid.toString();
@@ -89,7 +93,10 @@ function Grade() {
         e.preventDefault();
         let nid = handleNId(year, term);
         const fetchUser = async () => {
-            let info2 = await fetch(`http://localhost:55000/api/grade?id=${ID}&nid=${nid}`, {
+            if (isStudent) {
+                setId(id, isStudent);
+            }
+            let res = await fetch(`http://localhost:55000/api/grade?id=${ID}&nid=${nid}`, {
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -98,15 +105,22 @@ function Grade() {
                 },
                 method: 'GET',
             });
-            let data = await info2.json();
+            if (res.status !== 200) {
+                return null;
+            }
+            let data = await res.json();
             return data;
         };
         const handleLoadUser = async () => {
             let data = await fetchUser();
-            // data = data;
-            data = data['result'].point[0]['result'];
-            console.log(data);
-            setStudentGrade(data);
+            if (data) {
+                data = data['result'].point[0]['result'];
+                console.log(data);
+                setStudentGrade(data);
+            } else {
+                setStudentGrade(null);
+                alert('Cannot access data');
+            }
         };
         handleLoadUser();
     };

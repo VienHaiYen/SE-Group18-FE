@@ -23,7 +23,7 @@ function UserLayout({ children, loginState }) {
         <div className="d-flex ">
             <Header navItems={navs} userInfo={user} />
             <div className="p-5" style={{ width: '100%' }}>
-                {React.cloneElement(children, { id: loginState.id })}
+                {React.cloneElement(children, { id: loginState.id, role: loginState.role })}
                 {/* {children} */}
             </div>
             <Footer />
