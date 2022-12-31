@@ -6,8 +6,8 @@ function Home() {
                 <div className="col-sm-6">
                     <div className="card bg-dark mx-3 text-white my-3 py-5 ">
                         <div className=" mx-5 card-body d-flex justify-content-center flex-column text-center">
-                            <h5 className="card-title">Học sinh</h5>
-                            <Link to="/class-list">
+                            <h5 className="card-title">Thông tin cá nhân</h5>
+                            <Link to="/about">
                                 <div className="btn btn-light px-5">GO</div>
                             </Link>
                         </div>
@@ -25,7 +25,7 @@ function Home() {
                 </div>
             </div>
             <div className="row">
-            <div className="col-sm-6">
+                <div className="col-sm-6">
                     <div className="card bg-dark mx-3 text-white my-3 py-5 ">
                         <div className=" mx-5 card-body d-flex justify-content-center flex-column text-center">
                             <h5 className="card-title">Tổng kết</h5>

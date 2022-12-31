@@ -1,34 +1,48 @@
 //đừng làm nữa
 import { useState, useEffect } from 'react';
 function TeacherList() {
+    const [id, setId] = useState('');
     const [teachers, setTeacher] = useState([]);
-    // useEffect(() => {
-    //     fetchTeacher();
-    // }, []);
-    const fetchTeacher = async () => {
-        let res = await fetch('http://localhost:55000/api/teacher-list', {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Cache: 'no-cache',
-                sid: localStorage.getItem('sid'),
-            },
-            method: 'GET',
-        });
+    const [teacherFinding, setTeacherFinding] = useState([]);
+    useEffect(() => {
+        const fetchTeacher = async () => {
+            let res = await fetch('http://localhost:55000/api/teacher-list', {
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Cache: 'no-cache',
+                    sid: localStorage.getItem('sid'),
+                },
+                method: 'GET',
+            });
 
-        let data = await res.json();
-        if (data.status !== 200) {
-            console.log(data);
-            return data;
-        } else {
-            alert(data.message);
+            let data = await res.json();
+            if (data) {
+                return data;
+            } else {
+                alert('Loi khong tai duoc danh sach giao vien');
+                return [];
+            }
+        };
+        const handleFetchAllStudentInfo = async () => {
+            let data = await fetchTeacher();
             setTeacher(data);
-            return null;
-        }
-    };
+            setTeacherFinding(data);
+        };
+        handleFetchAllStudentInfo();
+    }, []);
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchTeacher();
+        if (id === '') {
+            setTeacherFinding(teachers);
+            return;
+        }
+        setTeacherFinding((tokenArray) => []);
+        teachers.forEach((teacher, index) => {
+            if (teacher.id === id) {
+                setTeacherFinding((teacherFinding) => [...teacherFinding, teacher]);
+            }
+        });
     };
     return (
         <>
@@ -37,7 +51,14 @@ function TeacherList() {
                 <div className="form-row align-items-end">
                     <div className="form-group mr-3">
                         <label htmlFor="inputEmail4">Mã giáo viên</label>
-                        <input type="text" className=" form-control" id="inputEmail4" placeholder="Mã giáo viên" />
+                        <input
+                            type="text"
+                            className=" form-control"
+                            id="inputEmail4"
+                            placeholder="Mã giáo viên"
+                            value={id}
+                            onChange={(e) => setId(e.target.value)}
+                        />
                     </div>
                     <button
                         type="submit"
@@ -61,16 +82,17 @@ function TeacherList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {teachers.map((teacher, index) => (
-                        <tr key={index}>
-                            <th scope="row">{index}</th>
-                            <td>{teacher.id}</td>
-                            <td>{teacher.name}</td>
-                            <td>{teacher.gender}</td>
-                            <td>{teacher.subject}</td>
-                            <td>{teacher.phone}</td>
-                        </tr>
-                    ))}
+                    {teacherFinding.length > 0 &&
+                        teacherFinding.map((teacher, index) => (
+                            <tr key={index}>
+                                <th scope="row">{index}</th>
+                                <td>{teacher.id}</td>
+                                <td>{teacher.name}</td>
+                                <td>{teacher.gender}</td>
+                                <td>{teacher.subject}</td>
+                                <td>{teacher.phone}</td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
         </>

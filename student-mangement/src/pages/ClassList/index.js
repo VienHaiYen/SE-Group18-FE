@@ -24,9 +24,11 @@ function ClassList() {
                 method: 'GET',
             });
             if (info.status !== 200) {
-                alert('Khong lay data ve duoc');
+                alert('Khong lay data ve duoc tu nid');
+                return null;
             }
             let data = await info.json();
+            console.log('class list', data);
             return data;
         };
         const handleGetClassList = async () => {
@@ -51,7 +53,7 @@ function ClassList() {
             method: 'GET',
         });
         if (info.status !== 200) {
-            alert('Khong lay data ve duoc');
+            alert('Data cua id ' + id + ' bi loi');
         }
         let data = await info.json();
 
@@ -92,20 +94,11 @@ function ClassList() {
                             <option defaultValue disabled>
                                 --Ten lop--
                             </option>
-                            {classList.map((cid, index) => {
-                                return <option value={index}>{cid._id}</option>;
-                            })}
+                            {classList &&
+                                classList.map((cid, index) => {
+                                    return <option value={index}>{cid.className}</option>;
+                                })}
                         </select>
-                        <input
-                            type="text"
-                            className=" form-control"
-                            id="inputEmail4"
-                            placeholder="Tên lớp"
-                            value={classID}
-                            onChange={(e) => {
-                                setClassID(e.target.value);
-                            }}
-                        />
                     </div>
                     <div className="form-group mr-3">
                         <label htmlFor="inputPassword4">Giáo viên chủ nhiệm</label>

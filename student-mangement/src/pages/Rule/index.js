@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 function Rule() {
     const [onChanging, setOnChanging] = useState(false);
-    let numclassName = 10;
     let numStuInclassName = [25, 38];
-    let age = [10, 15];
 
     const [year, setYear] = useState(2223);
     const [term, setTerm] = useState(1);
@@ -70,45 +68,76 @@ function Rule() {
                     </select>
                 </div>
             </form>
-            <div>
-                <p>
-                    Số Lớp trong trường X phải thỏa mãn:{' '}
-                    {(onChanging && (
-                        <input
-                            type="text"
-                            className="form-control ml-2"
-                            style={{ maxWidth: '100px', display: 'inline' }}
-                        />
-                    )) ||
-                        numclassName}
-                </p>
-                <p>
-                    Số Học sinh có trong 1 lớp học:{' '}
-                    {(onChanging && (
-                        <input
-                            type="text"
-                            className="form-control ml-2"
-                            style={{ maxWidth: '100px', display: 'inline' }}
-                        />
-                    )) ||
-                        numStuInclassName[0] + '-' + numStuInclassName[1]}
-                </p>
-                <p>
-                    Tuổi quy định của mỗi học sinh:{' '}
-                    {(onChanging && (
-                        <input
-                            type="text"
-                            className="form-control ml-2"
-                            style={{ maxWidth: '100px', display: 'inline' }}
-                        />
-                    )) ||
-                        age[0] + '-' + age[1]}
-                </p>
-            </div>
+            {rule && (
+                <div style={{ fontSize: '1.3rem' }}>
+                    <div>
+                        Số Lớp trong trường X phải thỏa mãn:
+                        <br />
+                        <label style={{ fontWeight: '700', marginRight: '10px', marginLeft: '20px' }}>Lớp 10: </label>
+                        {(onChanging && (
+                            <>
+                                <input
+                                    type="text"
+                                    className="form-control ml-2"
+                                    style={{ maxWidth: '100px', display: 'inline' }}
+                                />
+                            </>
+                        )) ||
+                            rule.numberOfClass._10}
+                        <br />
+                        <label style={{ fontWeight: '700', marginRight: '10px', marginLeft: '20px' }}>Lớp 11: </label>
+                        {(onChanging && (
+                            <>
+                                <input
+                                    type="text"
+                                    className="form-control ml-2"
+                                    style={{ maxWidth: '100px', display: 'inline' }}
+                                />
+                            </>
+                        )) ||
+                            rule.numberOfClass._11}
+                        <br />
+                        <label style={{ fontWeight: '700', marginRight: '10px', marginLeft: '20px' }}>Lớp 12: </label>
+                        {(onChanging && (
+                            <>
+                                <input
+                                    type="text"
+                                    className="form-control ml-2"
+                                    style={{ maxWidth: '100px', display: 'inline' }}
+                                />
+                            </>
+                        )) ||
+                            rule.numberOfClass._12}
+                        <br />
+                    </div>
+                    <div>
+                        Số Học sinh có trong 1 lớp học:{' '}
+                        {(onChanging && (
+                            <input
+                                type="text"
+                                className="form-control ml-2"
+                                style={{ maxWidth: '100px', display: 'inline' }}
+                            />
+                        )) ||
+                            rule.numberOfStudent['min'] + ' - ' + rule.numberOfStudent['max']}
+                    </div>
+                    <div>
+                        Tuổi quy định của mỗi học sinh:{' '}
+                        {(onChanging && (
+                            <input
+                                type="text"
+                                className="form-control ml-2"
+                                style={{ maxWidth: '100px', display: 'inline' }}
+                            />
+                        )) ||
+                            rule.age['min'] + ' - ' + rule.age['max']}
+                    </div>
+                </div>
+            )}
             <button
                 type="submit"
                 className="btn btn-secondary"
-                style={{ height: '40px', marginLeft: '20px', marginBottom: '1rem' }}
+                style={{ height: '40px', margin: '1rem' }}
                 onClick={handleSubmit}
             >
                 {onChanging ? 'Lưu thay đổi' : 'Thay đổi'}
