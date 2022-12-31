@@ -6,6 +6,44 @@ function Grade({ id, role }) {
         setId(id);
     }, []);
     let isStudent = role === 'student';
+    let studentsMathGrades = [
+        {
+            id: 20120633,
+            name: 'Vhyenn',
+            oral: 8.5,
+            _15min: 7,
+            _45min: 9,
+            _midterm: 8,
+            _finalterm: 9.4,
+        },
+        {
+            id: 20120095,
+            name: 'Nqhung',
+            oral: 8.5,
+            _15min: 7,
+            _45min: 9,
+            _midterm: 8,
+            _finalterm: 9.4,
+        },
+        {
+            id: 20120634,
+            name: 'Lmtri',
+            oral: 8.5,
+            _15min: 7,
+            _45min: 9,
+            _midterm: 8,
+            _finalterm: 9.4,
+        },
+        {
+            id: 20120364,
+            name: 'Ppsang',
+            oral: 8.5,
+            _15min: 7,
+            _45min: 9,
+            _midterm: 8,
+            _finalterm: 9.4,
+        },
+    ];
 
     let generalOneStudentGrades = [
         {

@@ -34,7 +34,7 @@ function DefaultLayout({ children, setLogin }) {
             method: 'POST',
             body: JSON.stringify({ id: id, password: password, role: role }),
         });
-        console.log('teeeeeew', id, password, role);
+        console.log('TK dang nhap', id, password, role);
         let data = await res.json();
         if (data !== undefined) {
             console.log(data);
