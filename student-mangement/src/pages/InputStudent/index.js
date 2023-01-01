@@ -67,6 +67,7 @@ function InputStudent() {
         if (data.status === 200) {
             return data;
         } else {
+            alert(data.message);
             return null;
         }
     };
