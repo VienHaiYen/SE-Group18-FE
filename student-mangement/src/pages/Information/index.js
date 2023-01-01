@@ -1,3 +1,4 @@
+import { GET, DELETE } from '../../modules';
 import './styles.css';
 import {
     MDBModal,
@@ -20,44 +21,19 @@ function Information({ id, role }) {
     useEffect(() => {
         handleLoadUser();
     }, []);
-    const fetchUser = async () => {
-        let info2 = await fetch(`http://localhost:55000/api/about/${ID}`, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Cache: 'no-cache',
-                sid: localStorage.getItem('sid'),
-            },
-            method: 'GET',
-        });
 
-        let data = await info2.json();
-        console.log('info: ', data);
-        return data;
-    };
     const handleLoadUser = async () => {
         // setUser(null);
-        let data = await fetchUser();
+        let data = await GET.fetchUser(ID);
         setUser(data);
         console.log('user', data);
     };
-    const handleDeleteInformation = async () => {
-        let info2 = await fetch(`http://localhost:55000/api/delete/${ID}`, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Cache: 'no-cache',
-                sid: localStorage.getItem('sid'),
-            },
-            method: 'DELETE',
-        });
 
-        let data = await info2.json();
-        alert(data.message);
-        console.log('info: ', data);
+    const handleDeleteAccount = async () => {
+        let data = await DELETE.deleteAccount(ID);
         toggleShow();
+        alert(data.message);
         setUser(null);
-        return data;
     };
     return (
         <>
@@ -74,7 +50,7 @@ function Information({ id, role }) {
                                 <button type="button" class="btn btn-outline-secondary" onClick={toggleShow}>
                                     Đóng
                                 </button>
-                                <button type="button" class="btn btn-outline-danger" onClick={handleDeleteInformation}>
+                                <button type="button" class="btn btn-outline-danger" onClick={handleDeleteAccount}>
                                     Đồng ý
                                 </button>
                             </MDBModalFooter>
@@ -95,7 +71,6 @@ function Information({ id, role }) {
                         placeholder="Mã số học sinh"
                         onChange={(e) => {
                             setId(e.target.value);
-                            console.log(ID);
                         }}
                         value={ID}
                     />

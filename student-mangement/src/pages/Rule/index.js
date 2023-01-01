@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
+import { GET, POST } from '../../modules';
+
 function Rule() {
     const [onChanging, setOnChanging] = useState(false);
-    let numclassName = 10;
-    let numStuInclassName = [25, 38];
-    let age = [10, 15];
 
     const [year, setYear] = useState(2223);
     const [rule, setRule] = useState();
@@ -20,68 +19,35 @@ function Rule() {
         return nid.toString();
     };
     useEffect(() => {
-        fetchRule();
+        handleFetchRule();
     }, []);
     useEffect(() => {
-        fetchRule();
+        handleFetchRule();
     }, [year]);
-    const fetchRule = async () => {
-        let nid = handleNId(year);
-        let res = await fetch(`http://localhost:55000/api/rule?nid=${nid}`, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Cache: 'no-cache',
-                sid: localStorage.getItem('sid'),
-            },
-            method: 'GET',
-        });
 
-        let data = await res.json();
-        if (data.message) {
-            // alert('khong ton tai');
-            console.log('msg:', data.message);
+    const handleFetchRule = async () => {
+        let nid = handleNId(year);
+
+        let data = await GET.fetchRule(nid);
+        if (!data) {
             setOnChanging(true);
-            return null;
         } else {
-            // alert('khong doi duoc');
-            console.log('msg:', data.message);
             setRule(data);
             setOnChanging(false);
-            return data;
         }
     };
-    const postRule = async () => {
-        let nid = handleNId(year);
-        let res = await fetch(`http://localhost:55000/api/rule`, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Cache: 'no-cache',
-                sid: localStorage.getItem('sid'),
-            },
-            method: 'POST',
-            body: JSON.stringify({
-                nid: nid,
-                numberOfStudent: {
-                    min: _1,
-                    max: _2,
-                },
-                numberOfClass: {
-                    _10: _3,
-                    _11: _4,
-                    _12: _5,
-                },
-                age: {
-                    min: _6,
-                    max: _7,
-                },
-            }),
-        });
 
-        let data = await res.json();
-        if (data.message) {
-            alert('msg:', data.message);
+    const handlePostRule = async () => {
+        let nid = handleNId(year);
+        let isSuccess = await POST.postRule(nid, _1, _2, _3, _4, _5, _6, _7);
+        if (!isSuccess) {
+            // fetchRule();
+            setRule({
+                nid: nid,
+                numberOfClass: { _10: _1, _11: _2, _12: _3 },
+                age: { min: _4, max: _5 },
+                numberOfStudent: { min: _6, max: _7 },
+            });
             setOnChanging(false);
             set1();
             set2();
@@ -90,16 +56,14 @@ function Rule() {
             set5();
             set6();
             set7();
-        } else {
-            alert('msg:', data);
-            // setOnChanging(false);
-            // return data;
+            return;
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let data = await fetchRule();
+        // let data = await fetchRule();
+        // return data;
         // setOnChanging(!onChanging);
         // if (!data.message) {
         //     alert('khong doi duoc');
@@ -125,13 +89,24 @@ function Rule() {
             </form>
             {/* GIAO DIEN XEM */}
 
-            {!onChanging && (
+            {!onChanging && rule && (
                 <div>
-                    <p>Số Lớp trong trường X phải thỏa mãn: {numclassName}</p>
-                    <p>
-                        Số Học sinh có trong 1 lớp học: {numStuInclassName[0]} + '-' + {numStuInclassName[1]}
-                    </p>
-                    <p>Tuổi quy định của mỗi học sinh: {age[0] + '-' + age[1]}</p>
+                    <h5>Số Lớp trong trường X phải thỏa mãn: </h5>
+                    {/* <br/>  */}
+                    <h6>Lop 10: {' ' + rule.numberOfClass._10}</h6>
+                    <h6>Lop 11: {' ' + rule.numberOfClass._11}</h6>
+                    <h6>Lop 12: {' ' + rule.numberOfClass._12}</h6>
+                    <br />
+                    <h5>Số Học sinh có trong 1 lớp học:</h5>
+                    <h6>
+                        Từ {' ' + rule.numberOfStudent.min} đến {' ' + rule.numberOfStudent.max}
+                    </h6>
+                    <br />
+                    <h5>
+                        Tuổi quy định của mỗi học sinh: <br />
+                    </h5>
+                    <h6>Nhỏ nhất: {' ' + rule.age.min}</h6>
+                    <h6>Cao nhất: {' ' + rule.age.max}</h6>
                 </div>
             )}
 
@@ -190,7 +165,7 @@ function Rule() {
                         value={_7}
                         onChange={(e) => set7(e.target.value)}
                     />
-                    <button onClick={postRule}>Luu</button>
+                    <button onClick={handlePostRule}>Luu</button>
                 </div>
             )}
             <button

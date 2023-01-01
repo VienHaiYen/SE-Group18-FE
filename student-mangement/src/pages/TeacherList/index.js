@@ -1,31 +1,12 @@
-//đừng làm nữa
 import { useState, useEffect } from 'react';
+import { GET } from '../../modules';
 function TeacherList() {
     const [id, setId] = useState('');
     const [teachers, setTeacher] = useState([]);
     const [teacherFinding, setTeacherFinding] = useState([]);
     useEffect(() => {
-        const fetchTeacher = async () => {
-            let res = await fetch('http://localhost:55000/api/teacher-list', {
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    Cache: 'no-cache',
-                    sid: localStorage.getItem('sid'),
-                },
-                method: 'GET',
-            });
-
-            let data = await res.json();
-            if (data) {
-                return data;
-            } else {
-                alert('Loi khong tai duoc danh sach giao vien');
-                return [];
-            }
-        };
         const handleFetchAllStudentInfo = async () => {
-            let data = await fetchTeacher();
+            let data = await GET.fetchTeacher();
             setTeacher(data);
             setTeacherFinding(data);
         };
@@ -85,7 +66,7 @@ function TeacherList() {
                     {teacherFinding.length > 0 &&
                         teacherFinding.map((teacher, index) => (
                             <tr key={index}>
-                                <th scope="row">{index}</th>
+                                <th scope="row">{index + 1}</th>
                                 <td>{teacher.id}</td>
                                 <td>{teacher.name}</td>
                                 <td>{teacher.gender}</td>

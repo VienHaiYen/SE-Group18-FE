@@ -1,9 +1,12 @@
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import { useState, useEffect } from 'react';
+import { GET, POST } from '../../modules';
 
 function Grade({ id, role }) {
     useEffect(() => {
-        setId(id);
+        if (isStudent) {
+            setId(id);
+        }
     }, []);
     let isStudent = role === 'student';
     let studentsMathGrades = [
@@ -90,31 +93,18 @@ function Grade({ id, role }) {
     };
     const handleGetGrade = (e) => {
         e.preventDefault();
-        let nid = handleNId(year, term);
-        const fetchUser = async () => {
-            if (isStudent) {
-                setId(id, isStudent);
-            }
-            let res = await fetch(`http://localhost:55000/api/grade?id=${ID}&nid=${nid}`, {
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    Cache: 'no-cache',
-                    sid: localStorage.getItem('sid'),
-                },
-                method: 'GET',
-            });
-            if (res.status !== 200) {
-                return null;
-            }
-            let data = await res.json();
-            return data;
-        };
+
         const handleLoadUser = async () => {
-            let data = await fetchUser();
+            let nid = handleNId(year, term);
+            if (isStudent) {
+                setId(id);
+            }
+            let data = await GET.fetchGradeOneStudent(ID, nid);
             if (data) {
-                data = data['result'].point[0]['result'];
                 console.log(data);
+                data = data['result'].point.result;
+                console.log(data);
+                // data = data['result'].point[0].result;
                 setStudentGrade(data);
             } else {
                 setStudentGrade(null);
@@ -221,24 +211,34 @@ function Grade({ id, role }) {
                         </thead>
                         <tbody>
                             {studentGrade &&
-                                Object.keys(studentGrade).map((subject, index) => (
-                                    <tr key={index}>
-                                        <th scope="row">{index}</th>
-                                        <td>{subject}</td>
-                                        <td>{studentGrade[subject].mieng[0]}</td>
-                                        <td>{studentGrade[subject]._15[0]}</td>
-                                        <td>{studentGrade[subject]._45[0]}</td>
-                                        <td>{studentGrade[subject]._gk}</td>
-                                        <td>{studentGrade[subject]._ck}</td>
-                                        <td>
-                                            {studentGrade[subject].mieng[0] * 0.1 +
+                                Object.keys(studentGrade).map((subject, index) => {
+                                    if (studentGrade[subject].mieng !== undefined) {
+                                        console.log(subject, studentGrade[subject].mieng);
+                                    }
+                                    // return 0;
+                                    return (
+                                        <tr key={index}>
+                                            <th scope="row">{index}</th>
+                                            <td>{subject}</td>
+                                            <td>{studentGrade[subject].mieng ? studentGrade[subject].mieng : ''}</td>
+                                            <td>{studentGrade[subject]._15 ? studentGrade[subject]._15 : ''}</td>
+                                            <td>{studentGrade[subject]._45 ? studentGrade[subject]._45 : ''}</td>
+                                            <td>
+                                                {studentGrade[subject]._gk !== null ? studentGrade[subject]._gk : ''}
+                                            </td>
+                                            <td>
+                                                {studentGrade[subject]._ck !== null ? studentGrade[subject]._ck : ''}
+                                            </td>
+                                            <td>
+                                                {/* {studentGrade[subject].mieng[0] * 0.1 +
                                                 studentGrade[subject]._15[0] * 0.1 +
                                                 studentGrade[subject]._45[0] * 0.2 +
                                                 studentGrade[subject]._gk * 0.2 +
-                                                studentGrade[subject]._ck * 0.4}
-                                        </td>
-                                    </tr>
-                                ))}
+                                                studentGrade[subject]._ck * 0.4} */}
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                         </tbody>
                     </table>
                 </>

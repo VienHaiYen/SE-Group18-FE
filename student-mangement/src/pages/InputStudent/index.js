@@ -1,5 +1,6 @@
 import './styles.css';
-import { useState } from 'react';
+import { GET, POST } from '../../modules';
+import { useEffect, useState } from 'react';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import 'react-toastify/dist/ReactToastify.css';
 function InputStudent() {
@@ -10,9 +11,26 @@ function InputStudent() {
         gender: '',
         mail: '',
         phone: '',
-        _class: 10,
+        _class: '',
         subject: '',
     });
+    const [findingState, setFindingState] = useState(true);
+
+    useEffect(() => {
+        if (findingState === true) {
+            setInfo((prevState) => ({
+                ...prevState,
+                subject: '',
+            }));
+            console.log(info);
+        } else {
+            setInfo((prevState) => ({
+                ...prevState,
+                _class: '',
+            }));
+            console.log(info);
+        }
+    }, [findingState]);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInfo((prevState) => ({
@@ -21,13 +39,11 @@ function InputStudent() {
         }));
         console.log(info);
     };
-    const [findingState, setFindingState] = useState(true);
-    const fetchInput = async () => {
+    const postInputStudent = async (info) => {
         let tmp = new Date(info['birthday']);
 
         let temp =
             ('0' + tmp.getDate()).slice(-2) + '/' + ('0' + (tmp.getMonth() + 1)).slice(-2) + '/' + tmp.getFullYear();
-        console.log(456, temp);
         let res = await fetch('http://localhost:55000/api/input-student', {
             headers: {
                 Accept: 'application/json',
@@ -44,13 +60,43 @@ function InputStudent() {
                 mail: info.mail,
                 phone: info.phone,
                 _class: info._class,
-                subject: info.subject,
+                subject: '',
             }),
         });
         let data = await res.json();
-        console.log('teeeeeew', data);
         if (data.status === 200) {
-            console.log(data);
+            return data;
+        } else {
+            return null;
+        }
+    };
+    const postInputTeacher = async () => {
+        let tmp = new Date(info['birthday']);
+
+        let temp =
+            ('0' + tmp.getDate()).slice(-2) + '/' + ('0' + (tmp.getMonth() + 1)).slice(-2) + '/' + tmp.getFullYear();
+        console.log(456, temp);
+        let res = await fetch('http://localhost:55000/api/input-teacher', {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Cache: 'no-cache',
+                sid: localStorage.getItem('sid'),
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                name: info.name,
+                birthday: temp,
+                address: info.address,
+                gender: info.gender,
+                mail: info.mail,
+                phone: info.phone,
+                _class: '',
+                subject: info._class,
+            }),
+        });
+        let data = await res.json();
+        if (data.status === 200) {
             return data;
         } else {
             alert(data.message);
@@ -59,8 +105,13 @@ function InputStudent() {
     };
     const handleInput = async (e) => {
         e.preventDefault();
-        let msg = await fetchInput();
-        console.log(msg);
+        if (findingState) {
+            let msg = await postInputStudent(info);
+            console.log(msg);
+        } else {
+            let msg = await postInputTeacher(info);
+            console.log(msg);
+        }
     };
 
     return (
@@ -77,6 +128,20 @@ function InputStudent() {
                         width="50"
                         onChange={() => {
                             setFindingState(!findingState);
+                            if (!findingState) {
+                                setInfo((prevState) => ({
+                                    ...prevState,
+                                    _class: '',
+                                }));
+                                console.log('info', info._class);
+                            } else {
+                                alert(123);
+                                setInfo((prevState) => ({
+                                    ...prevState,
+                                    subject: '',
+                                }));
+                            }
+                            console.log(info.subject, info._class);
                         }}
                     />
                 </div>
@@ -140,25 +205,31 @@ function InputStudent() {
                         {!findingState ? (
                             <div className="form-row-item">
                                 <label htmlFor="inputState">Môn học</label>
-                                <select id="inputState" className="form-control">
+                                <select
+                                    id="inputState"
+                                    className="form-control"
+                                    onChange={handleChange}
+                                    value={info.subject}
+                                    name="subject"
+                                >
                                     <option defaultValue disabled>
                                         --Môn--
                                     </option>
-                                    <option>Toán</option>
-                                    <option>Văn</option>
-                                    <option>Anh</option>
-                                    <option>Lý</option>
-                                    <option>Hóa</option>
-                                    <option>Sinh</option>
-                                    <option>Sử</option>
-                                    <option>Địa</option>
-                                    <option>GDCD</option>
+                                    <option value="Toan">Toán</option>
+                                    <option value="Van">Văn</option>
+                                    <option value="Anh">Anh</option>
+                                    <option value="Li">Lý</option>
+                                    <option value="Hoa">Hóa</option>
+                                    <option value="Sinh">Sinh</option>
+                                    <option value="Su">Sử</option>
+                                    <option value="Dia">Địa</option>
+                                    <option value="GDCD">GDCD</option>
                                 </select>
                             </div>
                         ) : (
                             <div className="form-row-item">
-                                <label htmlFor="inputState">Khối</label>
-                                <select
+                                <label htmlFor="inputState">Lớp</label>
+                                {/* <select
                                     id="inputState"
                                     className="form-control"
                                     onChange={handleChange}
@@ -171,7 +242,16 @@ function InputStudent() {
                                     <option>10</option>
                                     <option>11</option>
                                     <option>12</option>
-                                </select>
+                                </select> */}
+                                <input
+                                    // required
+                                    id="_class"
+                                    type="_class"
+                                    className="form-control"
+                                    onChange={handleChange}
+                                    value={info._class}
+                                    name="_class"
+                                />
                             </div>
                         )}
                     </div>

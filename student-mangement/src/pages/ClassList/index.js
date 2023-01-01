@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { GET } from '../../modules';
 function ClassList({ id, role }) {
     const [classID, setClassID] = useState(0);
     const [classList, setClassList] = useState([]);
@@ -10,89 +11,35 @@ function ClassList({ id, role }) {
         handleFetchAllStudentInfo();
     }, [classMembers]);
     useEffect(() => {
-        // Load danh sach lop moi lan onMouse
-        let nid = handleNId(year, term);
-        const fetchClassList = async () => {
-            let info = await fetch(`http://localhost:55000/api/class-list?nid=${nid}`, {
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    Cache: 'no-cache',
-                    sid: localStorage.getItem('sid'),
-                },
-                method: 'GET',
-            });
-            if (info.status !== 200) {
-                alert('Khong lay data ve duoc tu nam va hoc ki');
-                setStudents([]);
-                return null;
-            }
-            let data = await info.json();
-            console.log('class list', data);
-            return data;
-        };
         const handleGetClassList = async () => {
-            let data = await fetchClassList();
+            let nid = handleNId(year, term);
+            let data = await GET.fetchClassList(nid);
             if (role === 'admin') {
                 setClassList(data);
                 return;
             }
+            if (data === null) {
+                setStudents([]);
+            }
             data = await fetchClassInfo(data);
             console.log(data);
             setClassList(data);
-            console.log('454787sdesdas', classList);
         };
         handleGetClassList();
     }, [term, year]);
-    const fetchEachClassInfo = async (id) => {
-        let nid = handleNId(year, term);
-        let info = await fetch(`http://localhost:55000/api/class-list?nid=${nid}&id=${id}`, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Cache: 'no-cache',
-                sid: localStorage.getItem('sid'),
-            },
-            method: 'GET',
-        });
-        if (info.status !== 200) {
-            console.log('Du lieu cua lop co id la ' + id + ' bi loi');
-        }
-        let data = await info.json();
-        console.log(data);
-        return data;
-    };
-    async function fetchClassInfo(userIds) {
+    const fetchClassInfo = async (userIds) => {
         const _class = userIds.map(async (id) => {
-            const user = await fetchEachClassInfo(id);
+            let nid = handleNId(year, term);
+            const user = await GET.fetchEachClassInfo(id, nid);
             return user;
         });
         const users = await Promise.all(_class);
-        console.log('tu gv lay cac lop: ', users);
 
         return users;
-    }
+    };
     const handleNId = (year, term) => {
         let nid = year * 10 + term;
         return nid.toString();
-    };
-    //ham lay thong tin moi hoc sinh
-    const fetchUser = async (id) => {
-        let info = await fetch(`http://localhost:55000/api/about/${id}`, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Cache: 'no-cache',
-                sid: localStorage.getItem('sid'),
-            },
-            method: 'GET',
-        });
-        if (info.status !== 200) {
-            console.log('Data cua id ' + id + ' bi loi');
-        }
-        let data = await info.json();
-
-        return data;
     };
 
     const handleGetClass = (e) => {
@@ -102,22 +49,20 @@ function ClassList({ id, role }) {
             alert('Khong ton tai lop nay');
             return;
         }
-        console.log('truoc do', data);
         setClassMembers(data.members);
-        console.log('classMembers', classMembers);
     };
-    async function fetchInfo(userIds) {
+    const getAllInfo = async (userIds) => {
         const person = userIds.map(async (id) => {
-            const user = await fetchUser(id);
-            return user;
+            const data = await GET.fetchUser(id);
+            return data;
         });
         const users = await Promise.all(person);
         return users;
-    }
+    };
     const handleFetchAllStudentInfo = async () => {
-        let abc = await fetchInfo(classMembers);
-        setStudents(abc);
-        return abc;
+        let data = await getAllInfo(classMembers);
+        setStudents(data);
+        return data;
     };
 
     return (
