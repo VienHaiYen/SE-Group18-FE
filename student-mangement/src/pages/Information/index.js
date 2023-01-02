@@ -22,8 +22,9 @@ function Information({ id, role }) {
         handleLoadUser();
     }, []);
 
-    const handleLoadUser = async () => {
+    const handleLoadUser = async (e) => {
         // setUser(null);
+        e.preventDefault();
         let data = await GET.fetchUser(ID);
         setUser(data);
         console.log('user', data);
@@ -61,7 +62,7 @@ function Information({ id, role }) {
             <h2>Thông tin cá nhân</h2>
             <br />
             {isAdmin && (
-                <div className="form-group d-flex ">
+                <form className="form-group d-flex ">
                     <label htmlFor="inputEmail4">Mã số</label>
                     <input
                         style={{ maxWidth: '200px', marginLeft: '12px', transform: 'translateY(-8px)' }}
@@ -82,7 +83,7 @@ function Information({ id, role }) {
                     >
                         Tìm kiếm
                     </button>
-                </div>
+                </form>
             )}
             {user && user.id && (
                 <div style={{ fontSize: '1.2rem', width: '70%', maxWidth: '800px' }}>
@@ -111,6 +112,12 @@ function Information({ id, role }) {
                             <b style={{ marginRight: '10px' }}> Ngày sinh: </b>
                             {user.birthday}
                         </div>
+                        {user.role === 'teacher' && (
+                            <div className="form-row-item">
+                                <b style={{ marginRight: '10px' }}> Dạy môn: </b>
+                                {user.subject}
+                            </div>
+                        )}
                     </div>
                     <div className="form--row">
                         <div className="form-row-item">

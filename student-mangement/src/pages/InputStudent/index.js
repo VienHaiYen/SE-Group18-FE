@@ -93,7 +93,7 @@ function InputStudent() {
                 mail: info.mail,
                 phone: info.phone,
                 _class: '',
-                subject: info._class,
+                subject: info.subject,
             }),
         });
         let data = await res.json();
@@ -136,7 +136,6 @@ function InputStudent() {
                                 }));
                                 console.log('info', info._class);
                             } else {
-                                alert(123);
                                 setInfo((prevState) => ({
                                     ...prevState,
                                     subject: '',
