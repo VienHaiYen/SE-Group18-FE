@@ -134,10 +134,26 @@ const fetchGradeOneStudent = async (id, nid) => {
     let data = await res.json();
     return data;
 };
+const fetchGradeAPersonASubject = async (id, nid, subject) => {
+    let res = await fetch(`http://localhost:55000/api/grade?id=${id}&nid=${nid}&subject=${subject}`, {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Cache: 'no-cache',
+            sid: localStorage.getItem('sid'),
+        },
+        method: 'GET',
+    });
+    if (res.status !== 200) {
+        return null;
+    }
+    let data = await res.json();
 
+    return data;
+};
 //-----------------------------------------------------------------
 //POST METHODS
-const fetchAccount = async (id, password, role) => {
+const logIn = async (id, password, role) => {
     let res = await fetch('http://localhost:55000/login', {
         headers: {
             Accept: 'application/json',
@@ -219,7 +235,24 @@ const postGrade = async (nid, id, grade) => {
     let data = await res.json();
     return data;
 };
+const changePassword = async (currentPassword, newPassword) => {
+    let res = await fetch(`http://localhost:55000/api/change-password`, {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Cache: 'no-cache',
+            sid: localStorage.getItem('sid'),
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            newPassword: newPassword,
+            currentPassword: currentPassword,
+        }),
+    });
 
+    let data = await res.json();
+    return data;
+};
 //----------------------------------------------------------------
 //DELETE METHODS
 const deleteAccount = async (id) => {
@@ -246,11 +279,13 @@ module.exports = {
         fetchRule,
         fetchGradeAPerson,
         fetchGradeOneStudent,
+        fetchGradeAPersonASubject,
     },
     POST: {
-        fetchAccount,
+        logIn,
         postRule,
         postGrade,
+        changePassword,
     },
     DELETE: {
         deleteAccount,

@@ -61,7 +61,7 @@ function InputGrade() {
         return users;
     }
     const handleNId = (year, term) => {
-        let nid = year * 10 + term;
+        let nid = year * 10 + term * 1;
         return nid.toString();
     };
 

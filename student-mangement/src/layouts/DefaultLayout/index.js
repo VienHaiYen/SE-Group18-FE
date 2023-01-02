@@ -25,7 +25,7 @@ function DefaultLayout({ children, setLogin }) {
         console.log(role);
     };
     const handleLogin = async () => {
-        let account = await POST.fetchAccount(object.id, object.password, object.role);
+        let account = await POST.logIn(object.id, object.password, object.role);
         localStorage.setItem('sid', account.sid);
 
         if (account !== null) {

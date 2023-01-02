@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { GET, POST } from '../../modules';
 
 function Grade({ id, role }) {
+    let isStudent = role === 'student';
     useEffect(() => {
         if (isStudent) {
             setId(id);
         }
     }, []);
-    let isStudent = role === 'student';
 
     const [classID, setClassID] = useState(-1);
     const [classList, setClassList] = useState([]);
@@ -23,9 +23,6 @@ function Grade({ id, role }) {
     const [students, setStudents] = useState([]);
 
     useEffect(() => {
-        let nid = handleNId(year, term);
-        // alert(nid);
-
         if (role === 'admin') {
             handleGetClassList();
             setClassID(0);
@@ -44,8 +41,23 @@ function Grade({ id, role }) {
         let data = await fetchInfo(classMembers);
         return data;
     };
-    const fetchGradeAPersonASubject = async (id, nid) => {
-        let res = await fetch(`http://localhost:55000/api/grade?id=${id}&nid=${nid}&subject=${subject}`, {
+
+    async function fetchInfo(userIds) {
+        let nid = handleNId(year, term);
+        const person = userIds.map(async (id) => {
+            const user = await GET.fetchGradeAPersonASubject(id, nid, subject);
+            return user;
+        });
+        const users = await Promise.all(person);
+        console.log(users);
+        return users;
+    }
+    const handleNId = (year, term) => {
+        let nid = year * 10 + term * 1;
+        return nid.toString();
+    };
+    const fetchGradeFromStudent = async (nid) => {
+        let res = await fetch(`http://localhost:55000/api/grade?nid=${nid}`, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -58,23 +70,7 @@ function Grade({ id, role }) {
             return null;
         }
         let data = await res.json();
-
         return data;
-    };
-    async function fetchInfo(userIds) {
-        let nid = handleNId(year, term);
-        const person = userIds.map(async (id) => {
-            const user = await fetchGradeAPersonASubject(id, nid);
-            return user;
-        });
-        const users = await Promise.all(person);
-        console.log(users);
-        return users;
-    }
-    const handleNId = (year, term) => {
-        let nid = year * 10 + term * 1;
-        // alert('sos' + nid);
-        return nid.toString();
     };
     const handleGetGrade = (e) => {
         e.preventDefault();
@@ -84,12 +80,20 @@ function Grade({ id, role }) {
             if (isStudent) {
                 setId(id);
             }
-            let data = await GET.fetchGradeOneStudent(ID, nid);
-            console.log('diem mot hs: ', data);
+            let data;
+            if (isStudent) {
+                data = await fetchGradeFromStudent(nid);
+                console.log('diem mot hs: ', data);
+            } else {
+                data = await GET.fetchGradeOneStudent(ID, nid);
+            }
             if (data) {
-                data = data['result'].point.result;
+                if (isStudent) {
+                    data = data.point.result;
+                } else {
+                    data = data['result'].point.result;
+                }
                 console.log(data);
-                // data = data['result'].point[0].result;
                 setStudentGrade(data);
             } else {
                 setStudentGrade(null);
@@ -103,6 +107,7 @@ function Grade({ id, role }) {
         const handle = async () => {
             if (classList[classID]) {
                 await setClassMembers(classList[classID].members);
+                setStudents([]);
                 console.log('setclassme,', classMembers);
             }
         };

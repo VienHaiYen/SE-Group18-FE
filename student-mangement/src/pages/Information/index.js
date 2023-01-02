@@ -1,4 +1,4 @@
-import { GET, DELETE } from '../../modules';
+import { GET, DELETE, POST } from '../../modules';
 import './styles.css';
 import {
     MDBModal,
@@ -15,9 +15,14 @@ function Information({ id, role }) {
     const [user, setUser] = useState({});
     const [ID, setId] = useState('');
 
-    const [basicModal, setBasicModal] = useState(false);
+    const [basicModal1, setBasicModal1] = useState(false);
+    const [basicModal2, setBasicModal2] = useState(false);
 
-    const toggleShow = () => setBasicModal(!basicModal);
+    const toggleShow1 = () => setBasicModal1(!basicModal1);
+    const toggleShow2 = () => setBasicModal2(!basicModal2);
+
+    const [oldPass, setOldPass] = useState();
+    const [newPass, setNewPass] = useState();
     useEffect(() => {
         // if(role!=='admin')
         handleLoadUser();
@@ -35,26 +40,103 @@ function Information({ id, role }) {
 
     const handleDeleteAccount = async () => {
         let data = await DELETE.deleteAccount(ID);
-        toggleShow();
+        toggleShow1();
         alert(data.message);
         setUser(null);
+    };
+
+    const handleChangePassword = async () => {
+        let data = await POST.changePassword(oldPass, newPass);
+        alert(data.message);
+        toggleShow2();
+        // setUser(null);
     };
     return (
         <>
             <>
-                <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
+                <MDBModal show={basicModal1} setShow={setBasicModal1} tabIndex="-1">
                     <MDBModalDialog>
                         <MDBModalContent>
                             <MDBModalHeader>
                                 <MDBModalTitle>Modal title</MDBModalTitle>
                             </MDBModalHeader>
-                            <MDBModalBody>Bạn có thật sự muốn xóa người dùng có id là {ID} không ?</MDBModalBody>
+                            <MDBModalBody>
+                                <div className="form-group mr-3">
+                                    <label htmlFor="inputold4">Mật khẩu hiện tại</label>
+                                    <input
+                                        type="password"
+                                        className=" form-control"
+                                        id="inputold4"
+                                        placeholder="Mật khẩu hiện tại"
+                                        value={oldPass}
+                                        name="oldPass"
+                                        onChange={(e) => setOldPass(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group mr-3">
+                                    <label htmlFor="inputnew">Điểm 45 phút</label>
+                                    <input
+                                        type="password"
+                                        className=" form-control"
+                                        id="inputnew"
+                                        placeholder="Mật khẩu mới"
+                                        value={newPass}
+                                        name="newPass"
+                                        onChange={(e) => setNewPass(e.target.value)}
+                                    />
+                                </div>
+                            </MDBModalBody>
 
                             <MDBModalFooter>
-                                <button type="button" class="btn btn-outline-secondary" onClick={toggleShow}>
+                                <button type="button" class="btn btn-outline-secondary" onClick={toggleShow1}>
                                     Đóng
                                 </button>
                                 <button type="button" class="btn btn-outline-danger" onClick={handleDeleteAccount}>
+                                    Đồng ý
+                                </button>
+                            </MDBModalFooter>
+                        </MDBModalContent>
+                    </MDBModalDialog>
+                </MDBModal>
+
+                <MDBModal show={basicModal2} setShow={setBasicModal2} tabIndex="-1">
+                    <MDBModalDialog>
+                        <MDBModalContent>
+                            <MDBModalHeader>
+                                <MDBModalTitle> Đổi mật khẩu</MDBModalTitle>
+                            </MDBModalHeader>
+                            <MDBModalBody>
+                                <div className="form-group mr-3">
+                                    <label htmlFor="inputold4">Mật khẩu hiện tại</label>
+                                    <input
+                                        type="password"
+                                        className=" form-control"
+                                        id="inputold4"
+                                        placeholder="Mật khẩu hiện tại"
+                                        value={oldPass}
+                                        name="oldPass"
+                                        onChange={(e) => setOldPass(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group mr-3">
+                                    <label htmlFor="inputnew">Điểm 45 phút</label>
+                                    <input
+                                        type="password"
+                                        className=" form-control"
+                                        id="inputnew"
+                                        placeholder="Mật khẩu mới"
+                                        value={newPass}
+                                        name="newPass"
+                                        onChange={(e) => setNewPass(e.target.value)}
+                                    />
+                                </div>
+                            </MDBModalBody>
+
+                            <MDBModalFooter>
+                                <button type="button" class="btn btn-outline-secondary" onClick={toggleShow2}>
+                                    Đóng
+                                </button>
+                                <button type="button" class="btn btn-outline-danger" onClick={handleChangePassword}>
                                     Đồng ý
                                 </button>
                             </MDBModalFooter>
@@ -144,13 +226,22 @@ function Information({ id, role }) {
                 <button
                     type="button"
                     class="btn btn-danger"
-                    onClick={toggleShow}
+                    onClick={toggleShow1}
                     data-toggle="modal"
                     data-target="#exampleModal"
                 >
                     Delete
                 </button>
             )}
+            <button
+                type="button"
+                class="btn btn-dark"
+                onClick={toggleShow2}
+                data-toggle="modal"
+                data-target="#exampleModal"
+            >
+                Đổi mật khẩu
+            </button>
         </>
     );
 }
