@@ -57,6 +57,9 @@ const fetchClassList = async (nid) => {
             return response.json();
         })
         .catch((err) => alert('khong ket noi duoc'));
+
+    console.log(`http://localhost:55000/api/class-list?nid=${nid}`);
+    console.log(info);
     return info;
 };
 const fetchTeacher = async () => {

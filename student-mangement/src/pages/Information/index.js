@@ -19,12 +19,15 @@ function Information({ id, role }) {
 
     const toggleShow = () => setBasicModal(!basicModal);
     useEffect(() => {
+        // if(role!=='admin')
         handleLoadUser();
     }, []);
 
     const handleLoadUser = async (e) => {
         // setUser(null);
-        e.preventDefault();
+        if (role === 'admin') {
+            e.preventDefault();
+        }
         let data = await GET.fetchUser(ID);
         setUser(data);
         console.log('user', data);

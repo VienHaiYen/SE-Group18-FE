@@ -97,6 +97,7 @@ function InputStudent() {
             }),
         });
         let data = await res.json();
+        console.log(data);
         if (data.status === 200) {
             return data;
         } else {
