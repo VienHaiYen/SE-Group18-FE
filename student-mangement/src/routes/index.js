@@ -11,6 +11,7 @@ import {
     TeacherSchedule,
     Rule,
     TeacherList,
+    Summary,
 } from '../pages';
 
 export const publicRoutes = [{ path: '/', component: LogIn }];
@@ -26,4 +27,5 @@ export const privateRoutes = [
     { path: '/teacher-schedule', component: TeacherSchedule },
     { path: '/rule', component: Rule },
     { path: '/teacher-list', component: TeacherList },
+    { path: '/summary', component: Summary },
 ];

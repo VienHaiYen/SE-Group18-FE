@@ -163,13 +163,17 @@ const logIn = async (id, password, role) => {
         method: 'POST',
         body: JSON.stringify({ id: id, password: password, role: role }),
     });
+    // .then((res) => res.json())
+    // .catch((err) => alert(err));
     console.log('TK dang nhap', id, password, role);
     let data = await res.json();
+    if (data.message) {
+        alert(data.message);
+    }
     if (data !== undefined) {
-        console.log(data);
         return data;
     } else {
-        alert('Tài khoản hoặc mật khẩu không đúng, vui lòng thử lại');
+        // alert('Tài khoản hoặc mật khẩu không đúng, vui lòng thử lại');
         return null;
     }
 };

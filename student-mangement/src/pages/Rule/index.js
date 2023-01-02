@@ -82,8 +82,6 @@ function Rule() {
                         </option>
                         <option value={2223}>2022-2023</option>
                         <option value={2122}>2021-2022</option>
-                        <option value={2021}>2020-2021</option>
-                        <option value={1920}>2019-2020</option>
                     </select>
                 </div>
             </form>

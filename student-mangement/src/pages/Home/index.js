@@ -29,7 +29,7 @@ function Home() {
                     <div className="card bg-dark mx-3 text-white my-3 py-5 ">
                         <div className=" mx-5 card-body d-flex justify-content-center flex-column text-center">
                             <h5 className="card-title">Tổng kết</h5>
-                            <Link to="/class-list">
+                            <Link to="/summary">
                                 <div className="btn btn-light px-5">GO</div>
                             </Link>
                         </div>

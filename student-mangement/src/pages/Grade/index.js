@@ -1,6 +1,6 @@
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import { useState, useEffect } from 'react';
-import { GET, POST } from '../../modules';
+import { GET } from '../../modules';
 
 function Grade({ id, role }) {
     let isStudent = role === 'student';
@@ -239,8 +239,6 @@ function Grade({ id, role }) {
                                     </option>
                                     <option value={2223}>2022-2023</option>
                                     <option value={2122}>2021-2022</option>
-                                    <option value={2021}>2020-2021</option>
-                                    <option value={1920}>2019-2020</option>
                                 </select>
                             </div>
                             <div className="form-group mr-3">
@@ -292,10 +290,6 @@ function Grade({ id, role }) {
                             <tbody>
                                 {studentGrade &&
                                     Object.keys(studentGrade).map((subject, index) => {
-                                        if (studentGrade[subject].mieng !== undefined) {
-                                            console.log(subject, studentGrade[subject].mieng);
-                                        }
-                                        // return 0;
                                         return (
                                             <tr key={index}>
                                                 <th scope="row">{index}</th>

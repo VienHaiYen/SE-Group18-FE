@@ -31,7 +31,9 @@ function Information({ id, role }) {
     const handleLoadUser = async (e) => {
         // setUser(null);
         if (role === 'admin') {
-            e.preventDefault();
+            if (e !== undefined) {
+                e.preventDefault();
+            }
         }
         let data = await GET.fetchUser(ID);
         setUser(data);
@@ -50,6 +52,9 @@ function Information({ id, role }) {
         alert(data.message);
         toggleShow2();
         // setUser(null);
+    };
+    const convertIdToClassname = (id) => {
+        return id.substring(1, 3) + 'a' + id.substring(3);
     };
     return (
         <>
@@ -88,10 +93,10 @@ function Information({ id, role }) {
                             </MDBModalBody>
 
                             <MDBModalFooter>
-                                <button type="button" class="btn btn-outline-secondary" onClick={toggleShow1}>
+                                <button type="button" className="btn btn-outline-secondary" onClick={toggleShow1}>
                                     Đóng
                                 </button>
-                                <button type="button" class="btn btn-outline-danger" onClick={handleDeleteAccount}>
+                                <button type="button" className="btn btn-outline-danger" onClick={handleDeleteAccount}>
                                     Đồng ý
                                 </button>
                             </MDBModalFooter>
@@ -133,10 +138,10 @@ function Information({ id, role }) {
                             </MDBModalBody>
 
                             <MDBModalFooter>
-                                <button type="button" class="btn btn-outline-secondary" onClick={toggleShow2}>
+                                <button type="button" className="btn btn-outline-secondary" onClick={toggleShow2}>
                                     Đóng
                                 </button>
-                                <button type="button" class="btn btn-outline-danger" onClick={handleChangePassword}>
+                                <button type="button" className="btn btn-outline-danger" onClick={handleChangePassword}>
                                     Đồng ý
                                 </button>
                             </MDBModalFooter>
@@ -203,6 +208,12 @@ function Information({ id, role }) {
                                 {user.subject}
                             </div>
                         )}
+                        {user.role === 'student' && (
+                            <div className="form-row-item">
+                                <b style={{ marginRight: '10px' }}> Lớp: </b>
+                                {convertIdToClassname(user._class)}
+                            </div>
+                        )}
                     </div>
                     <div className="form--row">
                         <div className="form-row-item">
@@ -225,7 +236,7 @@ function Information({ id, role }) {
             {user && user.id && isAdmin && user.role !== 'admin' && (
                 <button
                     type="button"
-                    class="btn btn-danger"
+                    className="btn btn-danger"
                     onClick={toggleShow1}
                     data-toggle="modal"
                     data-target="#exampleModal"
@@ -236,7 +247,7 @@ function Information({ id, role }) {
             {!(isAdmin && id !== user.id) && (
                 <button
                     type="button"
-                    class="btn btn-dark"
+                    className="btn btn-dark"
                     onClick={toggleShow2}
                     data-toggle="modal"
                     data-target="#exampleModal"

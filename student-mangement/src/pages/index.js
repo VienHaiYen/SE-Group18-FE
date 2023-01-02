@@ -9,7 +9,7 @@ import ClassList from './ClassList';
 import TeacherSchedule from './TeacherSchedule';
 import Rule from './Rule';
 import TeacherList from './TeacherList';
-
+import Summary from './Summary';
 export {
     LogIn,
     Home,
@@ -22,4 +22,5 @@ export {
     TeacherSchedule,
     Rule,
     TeacherList,
+    Summary,
 };
