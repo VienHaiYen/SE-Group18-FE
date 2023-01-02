@@ -233,15 +233,17 @@ function Information({ id, role }) {
                     Delete
                 </button>
             )}
-            <button
-                type="button"
-                class="btn btn-dark"
-                onClick={toggleShow2}
-                data-toggle="modal"
-                data-target="#exampleModal"
-            >
-                Đổi mật khẩu
-            </button>
+            {!(isAdmin && id !== user.id) && (
+                <button
+                    type="button"
+                    class="btn btn-dark"
+                    onClick={toggleShow2}
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                >
+                    Đổi mật khẩu
+                </button>
+            )}
         </>
     );
 }
