@@ -41,9 +41,11 @@ function InputStudent() {
     };
     const postInputStudent = async (info) => {
         let tmp = new Date(info['birthday']);
-
-        let temp =
+        var temp;
+        if (tmp != null ){
+            temp =
             ('0' + tmp.getDate()).slice(-2) + '/' + ('0' + (tmp.getMonth() + 1)).slice(-2) + '/' + tmp.getFullYear();
+        }
         let res = await fetch('http://localhost:55000/api/input-student', {
             headers: {
                 Accept: 'application/json',
