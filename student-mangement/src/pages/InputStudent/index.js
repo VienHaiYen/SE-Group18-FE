@@ -42,8 +42,8 @@ function InputStudent() {
     const postInputStudent = async (info) => {
         let tmp = new Date(info['birthday']);
         console.log(tmp);
-        var temp;
-        if (tmp != '' ){
+        var temp = null;
+        if (tmp instanceof Date && !isNaN(tmp)){
             temp =
             ('0' + tmp.getDate()).slice(-2) + '/' + ('0' + (tmp.getMonth() + 1)).slice(-2) + '/' + tmp.getFullYear();
         }
