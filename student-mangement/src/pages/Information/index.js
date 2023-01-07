@@ -124,7 +124,7 @@ function Information({ id, role }) {
                                     />
                                 </div>
                                 <div className="form-group mr-3">
-                                    <label htmlFor="inputnew">Điểm 45 phút</label>
+                                    <label htmlFor="inputnew">Mật khẩu mới</label>
                                     <input
                                         type="password"
                                         className=" form-control"

@@ -62,10 +62,9 @@ function Schedule({ id, role }) {
                             <option defaultValue disabled>
                                 --Năm học--
                             </option>
-                            <option>2019-2020</option>
-                            <option>2020-2021</option>
-                            <option>2021-2022</option>
+                            
                             <option>2022-2023</option>
+                            <option>2021-2022</option>
                         </select>
                     </div>
                     <div className="form-group mr-3">

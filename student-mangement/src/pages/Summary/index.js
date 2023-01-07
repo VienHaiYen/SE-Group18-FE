@@ -5,7 +5,7 @@ function Summary() {
     const DTB = 5;
     const [findBySubject, setFindingBySubject] = useState(true);
 
-    const [classID, setClassID] = useState(0);
+    // const [classID, setClassID] = useState(0);
     const [classList, setClassList] = useState([]);
     // const [classMembers, setClassMembers] = useState([]);
     const [year, setYear] = useState(2223);
@@ -207,7 +207,7 @@ function Summary() {
                                     return accur;
                                 }, 0);
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                         <th scope="row">{index + 1}</th>
                                         <td>{_class.id}</td>
                                         <td>{_class.data.length}</td>
@@ -254,7 +254,7 @@ function Summary() {
                                     return accur;
                                 }, 0);
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                         <th scope="row">{index + 1}</th>
                                         <td>{_class.id}</td>
                                         <td>{_class.data.length}</td>
