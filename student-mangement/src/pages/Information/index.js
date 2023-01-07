@@ -63,11 +63,9 @@ function Information({ id, role }) {
                     <MDBModalDialog>
                         <MDBModalContent>
                             <MDBModalHeader>
-                                <MDBModalTitle>Modal title</MDBModalTitle>
+                                <MDBModalTitle>Xóa tài khoản</MDBModalTitle>
                             </MDBModalHeader>
-                            <MDBModalBody>
-                                    Bạn có muốn xoá tài khoàn có id là {ID} không?
-                            </MDBModalBody>
+                            <MDBModalBody>Bạn có muốn xoá tài khoàn có id là {ID} không?</MDBModalBody>
 
                             <MDBModalFooter>
                                 <button type="button" className="btn btn-outline-secondary" onClick={toggleShow1}>

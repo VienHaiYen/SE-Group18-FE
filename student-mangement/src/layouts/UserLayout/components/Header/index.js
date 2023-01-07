@@ -16,6 +16,7 @@ function Header({ navItems, userInfo }) {
         if (data !== undefined) {
             console.log(data);
             localStorage.removeItem('info');
+            localStorage.removeItem('sid');
             navigate('/');
             return data;
         }

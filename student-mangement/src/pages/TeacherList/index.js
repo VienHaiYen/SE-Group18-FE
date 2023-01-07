@@ -1,16 +1,32 @@
 import { useState, useEffect } from 'react';
 import { GET } from '../../modules';
+import {
+    MDBModal,
+    MDBModalDialog,
+    MDBModalContent,
+    MDBModalHeader,
+    MDBModalTitle,
+    MDBModalBody,
+    MDBModalFooter,
+} from 'mdb-react-ui-kit';
 function TeacherList() {
     const [id, setId] = useState('');
     const [teachers, setTeacher] = useState([]);
     const [teacherFinding, setTeacherFinding] = useState([]);
+    const [currentID, setCurrentID] = useState();
+
+    const [basicModal, setBasicModal] = useState(false);
+
+    const toggleShow = () => setBasicModal(!basicModal);
+
     useEffect(() => {
-        const handleFetchAllStudentInfo = async () => {
+        const handleFetchAllTeacherInfo = async () => {
             let data = await GET.fetchTeacher();
             setTeacher(data);
+            console.log('teacher', data);
             setTeacherFinding(data);
         };
-        handleFetchAllStudentInfo();
+        handleFetchAllTeacherInfo();
     }, []);
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,8 +41,28 @@ function TeacherList() {
             }
         });
     };
+    const handleChange = () => {};
     return (
         <>
+            <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
+                <MDBModalDialog>
+                    <MDBModalContent>
+                        <MDBModalHeader>
+                            <MDBModalTitle>Thay đổi</MDBModalTitle>
+                        </MDBModalHeader>
+                        <MDBModalBody>Thay đổi lớp dạy</MDBModalBody>
+
+                        <MDBModalFooter>
+                            <button type="button" className="btn btn-outline-secondary" onClick={toggleShow}>
+                                Đóng
+                            </button>
+                            <button type="button" className="btn btn-outline-danger" onClick={handleChange}>
+                                Đồng ý
+                            </button>
+                        </MDBModalFooter>
+                    </MDBModalContent>
+                </MDBModalDialog>
+            </MDBModal>
             <form>
                 <h2>Danh sách Giáo viên </h2>
                 <div className="form-row align-items-end">
@@ -72,6 +108,22 @@ function TeacherList() {
                                 <td>{teacher.gender}</td>
                                 <td>{teacher.subject}</td>
                                 <td>{teacher.phone}</td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-primary"
+                                        onClick={() => {
+                                            setCurrentID(teachers[index]);
+                                            toggleShow();
+                                            // if (grade !== null) {
+                                            //     setCurrentGrade(grade.point);
+                                            // }
+                                            // setBasicModal(true);
+                                        }}
+                                    >
+                                        Chỉnh sửa
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                 </tbody>

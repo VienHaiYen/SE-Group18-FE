@@ -15,7 +15,8 @@ function InputStudent() {
         subject: '',
     });
     const [findingState, setFindingState] = useState(true);
-
+    const [classID, setClassID] = useState(-1);
+    const [classList, setClassList] = useState([]);
     useEffect(() => {
         if (findingState === true) {
             setInfo((prevState) => ({
@@ -31,6 +32,22 @@ function InputStudent() {
             console.log(info);
         }
     }, [findingState]);
+    useEffect(() => {
+        handleGetClassList();
+        // setClassID(0);
+    }, []);
+    const handleGetClassList = async () => {
+        let nid = handleNId(2223, 1);
+        // alert(nid);
+        let data = await GET.fetchClassList(nid);
+        await setClassList(data);
+        console.log('ds cac lop', classList);
+        return;
+    };
+    const handleNId = (year, term) => {
+        let nid = year * 10 + term * 1;
+        return nid.toString();
+    };
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInfo((prevState) => ({
@@ -43,9 +60,13 @@ function InputStudent() {
         let tmp = new Date(info['birthday']);
         console.log(tmp);
         var temp = null;
-        if (tmp instanceof Date && !isNaN(tmp)){
+        if (tmp instanceof Date && !isNaN(tmp)) {
             temp =
-            ('0' + tmp.getDate()).slice(-2) + '/' + ('0' + (tmp.getMonth() + 1)).slice(-2) + '/' + tmp.getFullYear();
+                ('0' + tmp.getDate()).slice(-2) +
+                '/' +
+                ('0' + (tmp.getMonth() + 1)).slice(-2) +
+                '/' +
+                tmp.getFullYear();
         }
         let res = await fetch('http://localhost:55000/api/input-student', {
             headers: {
@@ -232,29 +253,26 @@ function InputStudent() {
                         ) : (
                             <div className="form-row-item">
                                 <label htmlFor="inputState">Lớp</label>
-                                {/* <select
-                                    id="inputState"
+                                <select
+                                    id="yearID"
                                     className="form-control"
+                                    // onChange={(e) => {
+                                    //     setClassID(e.target.value);
+                                    //     console.log(classID);
+                                    // }}
+
                                     onChange={handleChange}
                                     value={info._class}
                                     name="_class"
                                 >
                                     <option defaultValue disabled>
-                                        Khối
+                                        --Ten lop--
                                     </option>
-                                    <option>10</option>
-                                    <option>11</option>
-                                    <option>12</option>
-                                </select> */}
-                                <input
-                                    // required
-                                    id="_class"
-                                    type="_class"
-                                    className="form-control"
-                                    onChange={handleChange}
-                                    value={info._class}
-                                    name="_class"
-                                />
+                                    {classList &&
+                                        classList.map((cid, index) => {
+                                            return <option value={cid.id}>{cid.className}</option>;
+                                        })}
+                                </select>
                             </div>
                         )}
                     </div>

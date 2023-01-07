@@ -217,16 +217,6 @@ function InputGrade() {
                                 })}
                         </select>
                     </div>
-                    {/* <div className="form-group mr-3">
-                        <label htmlFor="inputPassword4">Giáo viên chủ nhiệm</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="inputPassword4"
-                            placeholder="--Giáo viên chủ nhiệm--"
-                            disabled
-                        />
-                    </div> */}
                     <div className="form-group mr-3">
                         <label htmlFor="yearID">Năm học</label>
                         <select id="yearID" className="form-control" onChange={(e) => setYear(e.target.value)}>
