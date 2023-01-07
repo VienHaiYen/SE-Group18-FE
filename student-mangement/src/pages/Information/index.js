@@ -66,30 +66,7 @@ function Information({ id, role }) {
                                 <MDBModalTitle>Modal title</MDBModalTitle>
                             </MDBModalHeader>
                             <MDBModalBody>
-                                <div className="form-group mr-3">
-                                    <label htmlFor="inputold4">Mật khẩu hiện tại</label>
-                                    <input
-                                        type="password"
-                                        className=" form-control"
-                                        id="inputold4"
-                                        placeholder="Mật khẩu hiện tại"
-                                        value={oldPass}
-                                        name="oldPass"
-                                        onChange={(e) => setOldPass(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group mr-3">
-                                    <label htmlFor="inputnew">Điểm 45 phút</label>
-                                    <input
-                                        type="password"
-                                        className=" form-control"
-                                        id="inputnew"
-                                        placeholder="Mật khẩu mới"
-                                        value={newPass}
-                                        name="newPass"
-                                        onChange={(e) => setNewPass(e.target.value)}
-                                    />
-                                </div>
+                                    Bạn có muốn xoá tài khoàn có id là {ID} không?
                             </MDBModalBody>
 
                             <MDBModalFooter>
