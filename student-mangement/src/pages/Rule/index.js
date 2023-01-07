@@ -45,8 +45,8 @@ function Rule() {
             setRule({
                 nid: nid,
                 numberOfClass: { _10: _1, _11: _2, _12: _3 },
-                age: { min: _4, max: _5 },
-                numberOfStudent: { min: _6, max: _7 },
+                numberOfStudent: { min: _4, max: _5 },
+                age: { min: _6, max: _7 },
             });
             setOnChanging(false);
             set1();
@@ -62,12 +62,7 @@ function Rule() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // let data = await fetchRule();
-        // return data;
-        // setOnChanging(!onChanging);
-        // if (!data.message) {
-        //     alert('khong doi duoc');
-        // }
+        setOnChanging(!onChanging);
     };
 
     return (
@@ -112,68 +107,90 @@ function Rule() {
             {onChanging && (
                 <div>
                     <p>Số Lớp trong trường X phải thỏa mãn: </p>
-                    <input
-                        type="text"
-                        className="form-control ml-2"
-                        style={{ maxWidth: '100px', display: 'inline' }}
-                        value={_1}
-                        onChange={(e) => set1(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        className="form-control ml-2"
-                        style={{ maxWidth: '100px', display: 'inline' }}
-                        value={_2}
-                        onChange={(e) => set2(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        className="form-control ml-2"
-                        style={{ maxWidth: '100px', display: 'inline' }}
-                        value={_3}
-                        onChange={(e) => set3(e.target.value)}
-                    />
+                    <div className="form-row">
+                        <h6>Lớp 10</h6>
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                            value={_1}
+                            onChange={(e) => set1(e.target.value)}
+                        />
+                        <h6>Lớp 11</h6>
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                            value={_2}
+                            onChange={(e) => set2(e.target.value)}
+                        />
+                        <h6>Lớp 12</h6>
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                            value={_3}
+                            onChange={(e) => set3(e.target.value)}
+                        />
+                    </div>
                     <p>Số Học sinh có trong 1 lớp học: </p>
-                    <input
-                        type="text"
-                        className="form-control ml-2"
-                        style={{ maxWidth: '100px', display: 'inline' }}
-                        value={_4}
-                        onChange={(e) => set4(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        className="form-control ml-2"
-                        style={{ maxWidth: '100px', display: 'inline' }}
-                        value={_5}
-                        onChange={(e) => set5(e.target.value)}
-                    />
+                    <div className="form-row">
+                        <h6>Min</h6>
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                            value={_4}
+                            onChange={(e) => set4(e.target.value)}
+                        />
+                        <h6>Max</h6>
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                            value={_5}
+                            onChange={(e) => set5(e.target.value)}
+                        />
+                    </div>
                     <p>Tuổi quy định của mỗi học sinh: </p>
-                    <input
-                        type="text"
-                        className="form-control ml-2"
-                        style={{ maxWidth: '100px', display: 'inline' }}
-                        value={_6}
-                        onChange={(e) => set6(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        className="form-control ml-2"
-                        style={{ maxWidth: '100px', display: 'inline' }}
-                        value={_7}
-                        onChange={(e) => set7(e.target.value)}
-                    />
-                    <button onClick={handlePostRule}>Luu</button>
+                    <div className="form-row">
+                        <h6>Min</h6>
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                            value={_6}
+                            onChange={(e) => set6(e.target.value)}
+                        />
+                        <h6>Max</h6>
+                        <input
+                            type="text"
+                            className="form-control ml-2"
+                            style={{ maxWidth: '100px', display: 'inline' }}
+                            value={_7}
+                            onChange={(e) => set7(e.target.value)}
+                        />
+                    </div>
                 </div>
             )}
+            <br />
             <button
                 type="submit"
                 className="btn btn-secondary"
                 style={{ height: '40px', marginLeft: '20px', marginBottom: '1rem' }}
                 onClick={handleSubmit}
             >
-                {onChanging ? 'Lưu thay đổi' : 'Thay đổi'}
+                {onChanging ? 'Hủy' : 'Thay đổi'}
             </button>
+            {onChanging && (
+                <button
+                    onClick={handlePostRule}
+                    className="btn btn-primary"
+                    style={{ height: '40px', marginLeft: '20px', marginBottom: '1rem' }}
+                >
+                    Luu
+                </button>
+            )}
             {/* </form> */}
         </>
     );

@@ -5,13 +5,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes, privateRoutes } from './routes';
 
 function App() {
-    const [loginState, setLoginState] = useState({
-        isLogin: true,
-        id: '',
-        role: '',
-        name: '',
-        path: [],
-    });
+    const [loginState, setLoginState] = useState(
+        localStorage.getItem('info')
+            ? JSON.parse(localStorage.getItem('info'))
+            : {
+                  isLogin: true,
+                  id: '',
+                  role: '',
+                  name: '',
+                  path: '',
+              },
+    );
     useEffect(() => {
         console.log('tai app.js', loginState);
     }, [loginState]);

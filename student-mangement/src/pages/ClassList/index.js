@@ -82,7 +82,7 @@ function ClassList({ id, role }) {
                                 })}
                         </select>
                     </div>
-                    <div className="form-group mr-3">
+                    {/* <div className="form-group mr-3">
                         <label htmlFor="inputPassword4">Giáo viên chủ nhiệm</label>
                         <input
                             type="text"
@@ -91,7 +91,7 @@ function ClassList({ id, role }) {
                             placeholder="--Giáo viên chủ nhiệm--"
                             disabled
                         />
-                    </div>
+                    </div> */}
                     <div className="form-group mr-3">
                         <label htmlFor="yearID">Năm học</label>
                         <select id="yearID" className="form-control" onChange={(e) => setYear(e.target.value)}>

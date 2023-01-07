@@ -38,6 +38,7 @@ function DefaultLayout({ children, setLogin }) {
                 name: name,
                 path: path,
             };
+            localStorage.setItem('info', JSON.stringify(info));
             // console.log(document.cookie);
             navigate(path[0].to);
             setLogin(info);

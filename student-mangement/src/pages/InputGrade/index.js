@@ -73,6 +73,7 @@ function InputGrade() {
             return;
         }
         setClassMembers(data.members);
+        console.log(456, classMembers);
     };
 
     async function fetchInfo(userIds) {
@@ -216,7 +217,7 @@ function InputGrade() {
                                 })}
                         </select>
                     </div>
-                    <div className="form-group mr-3">
+                    {/* <div className="form-group mr-3">
                         <label htmlFor="inputPassword4">Giáo viên chủ nhiệm</label>
                         <input
                             type="text"
@@ -225,7 +226,7 @@ function InputGrade() {
                             placeholder="--Giáo viên chủ nhiệm--"
                             disabled
                         />
-                    </div>
+                    </div> */}
                     <div className="form-group mr-3">
                         <label htmlFor="yearID">Năm học</label>
                         <select id="yearID" className="form-control" onChange={(e) => setYear(e.target.value)}>

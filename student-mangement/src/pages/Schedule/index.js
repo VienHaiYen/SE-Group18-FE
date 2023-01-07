@@ -32,7 +32,7 @@ function Schedule({ id, role }) {
                                 <label htmlFor="inputEmail4">Tên lớp</label>
                                 <input type="text" className=" form-control" id="inputEmail4" placeholder="Tên lớp" />
                             </div>
-                            <div className="form-group mr-3">
+                            {/* <div className="form-group mr-3">
                                 <label htmlFor="inputPassword4">Giáo viên chủ nhiệm</label>
                                 <input
                                     type="text"
@@ -41,7 +41,7 @@ function Schedule({ id, role }) {
                                     placeholder="--Giáo viên chủ nhiệm--"
                                     disabled
                                 />
-                            </div>
+                            </div> */}
                         </>
                     )}
                     {isStudent && (
@@ -62,7 +62,7 @@ function Schedule({ id, role }) {
                             <option defaultValue disabled>
                                 --Năm học--
                             </option>
-                            
+
                             <option>2022-2023</option>
                             <option>2021-2022</option>
                         </select>

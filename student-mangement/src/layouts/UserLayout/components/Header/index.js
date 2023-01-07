@@ -15,6 +15,7 @@ function Header({ navItems, userInfo }) {
         let data = await res.json();
         if (data !== undefined) {
             console.log(data);
+            localStorage.removeItem('info');
             navigate('/');
             return data;
         }
