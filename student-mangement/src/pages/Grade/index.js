@@ -184,7 +184,6 @@ function Grade({ id, role }) {
                                     <div className="form-group mr-3">
                                         <label>Tên lớp</label>
                                         <select
-                                            id="yearID"
                                             className="form-control"
                                             onChange={(e) => setClassID(e.target.value)}
                                         >

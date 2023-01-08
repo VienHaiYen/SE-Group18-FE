@@ -15,7 +15,7 @@ function InputStudent() {
         subject: '',
     });
     const [findingState, setFindingState] = useState(true);
-    const [classID, setClassID] = useState(-1);
+    // const [classID, setClassID] = useState(-1);
     const [classList, setClassList] = useState([]);
     useEffect(() => {
         if (findingState === true) {
@@ -256,11 +256,6 @@ function InputStudent() {
                                 <select
                                     id="yearID"
                                     className="form-control"
-                                    // onChange={(e) => {
-                                    //     setClassID(e.target.value);
-                                    //     console.log(classID);
-                                    // }}
-
                                     onChange={handleChange}
                                     value={info._class}
                                     name="_class"
