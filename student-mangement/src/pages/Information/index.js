@@ -14,20 +14,34 @@ function Information({ id, role }) {
     let isAdmin = role === 'admin';
     const [user, setUser] = useState({});
     const [ID, setId] = useState('');
+    const [classList, setClassList] = useState([]);
 
     const [basicModal1, setBasicModal1] = useState(false);
     const [basicModal2, setBasicModal2] = useState(false);
+    const [basicModal3, setBasicModal3] = useState(false);
 
     const toggleShow1 = () => setBasicModal1(!basicModal1);
     const toggleShow2 = () => setBasicModal2(!basicModal2);
+    const toggleShow3 = () => setBasicModal3(!basicModal3);
 
     const [oldPass, setOldPass] = useState();
     const [newPass, setNewPass] = useState();
+
+    const [addID, setAddID] = useState();
+
     useEffect(() => {
         // if(role!=='admin')
         handleLoadUser();
+        handleGetClassList();
     }, []);
-
+    const handleGetClassList = async () => {
+        let nid = 22231;
+        // alert(nid);
+        let data = await GET.fetchClassList(nid);
+        await setClassList(data);
+        console.log('ds cac lop', classList);
+        return;
+    };
     const handleLoadUser = async (e) => {
         // setUser(null);
         if (role === 'admin') {
@@ -55,6 +69,39 @@ function Information({ id, role }) {
     };
     const convertIdToClassname = (id) => {
         return id.substring(1, 3) + 'a' + id.substring(3);
+    };
+    const changeClass = async (id, _class) => {
+        let nid = 22231;
+        console.log(123, id, _class);
+        let res = await fetch(`http://localhost:55000/api/transfer-student-to-class`, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Cache: 'no-cache',
+                sid: localStorage.getItem('sid'),
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                nid: nid,
+                id: id,
+                classId: _class,
+            }),
+        });
+
+        let data = await res.json();
+        alert(data.message);
+        if (data) {
+            return data;
+        } else {
+            alert('Loi khong them lop cho gv duoc');
+            return [];
+        }
+    };
+    const handleChangeClass = async () => {
+        let data = await changeClass(ID, addID);
+        setAddID('');
+        handleLoadUser();
+        return data;
     };
     return (
         <>
@@ -117,6 +164,56 @@ function Information({ id, role }) {
                                     Đóng
                                 </button>
                                 <button type="button" className="btn btn-outline-danger" onClick={handleChangePassword}>
+                                    Đồng ý
+                                </button>
+                            </MDBModalFooter>
+                        </MDBModalContent>
+                    </MDBModalDialog>
+                </MDBModal>
+
+                <MDBModal show={basicModal3} setShow={setBasicModal3} tabIndex="-1">
+                    <MDBModalDialog>
+                        <MDBModalContent>
+                            <MDBModalHeader>
+                                <MDBModalTitle>Chuyển lớp</MDBModalTitle>
+                            </MDBModalHeader>
+                            <MDBModalBody>
+                                <div className="form-group mr-3">
+                                    <label htmlFor="inputold4">Lớp hiện tại</label>
+                                    <input
+                                        className=" form-control"
+                                        id="inputold4"
+                                        placeholder="Lớp hiện tại"
+                                        value={user._class ? convertIdToClassname(user._class) : ''}
+                                        disabled
+                                    />
+                                </div>
+                                <div className="form-group mr-3">
+                                    <label htmlFor="inputnew">Chuyển đến</label>
+                                    <select
+                                        className="form-control"
+                                        onChange={(e) => {
+                                            setAddID(e.target.value);
+                                            console.log(addID);
+                                        }}
+                                        style={{ width: '100px', marginRight: '20px' }}
+                                    >
+                                        <option value="" defaultValue style={{ display: 'none' }}></option>
+                                        {classList &&
+                                            classList.map((_class, index) => {
+                                                return (
+                                                    <option value={_class.id}>{convertIdToClassname(_class.id)}</option>
+                                                );
+                                            })}
+                                    </select>
+                                </div>
+                            </MDBModalBody>
+
+                            <MDBModalFooter>
+                                <button type="button" className="btn btn-outline-secondary" onClick={toggleShow3}>
+                                    Đóng
+                                </button>
+                                <button type="button" className="btn btn-outline-danger" onClick={handleChangeClass}>
                                     Đồng ý
                                 </button>
                             </MDBModalFooter>
@@ -209,15 +306,27 @@ function Information({ id, role }) {
                 </div>
             )}
             {user && user.id && isAdmin && user.role !== 'admin' && (
-                <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={toggleShow1}
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                >
-                    Delete
-                </button>
+                <>
+                    <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={toggleShow1}
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                    >
+                        Delete
+                    </button>
+
+                    <button
+                        type="button"
+                        className="btn btn-warning ml-2"
+                        onClick={toggleShow3}
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                    >
+                        Chuyển lớp
+                    </button>
+                </>
             )}
             {!(isAdmin && id !== user.id) && (
                 <button
