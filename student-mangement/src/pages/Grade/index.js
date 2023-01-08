@@ -183,10 +183,7 @@ function Grade({ id, role }) {
                                 <>
                                     <div className="form-group mr-3">
                                         <label>Tên lớp</label>
-                                        <select
-                                            className="form-control"
-                                            onChange={(e) => setClassID(e.target.value)}
-                                        >
+                                        <select className="form-control" onChange={(e) => setClassID(e.target.value)}>
                                             <option defaultValue disabled>
                                                 --Ten lop--
                                             </option>
@@ -283,7 +280,7 @@ function Grade({ id, role }) {
                                     <th scope="col">Kiểm tra 45' (20%)</th>
                                     <th scope="col">Giữa kì (20%)</th>
                                     <th scope="col">Cuối kì (40%)</th>
-                                    <th scope="col">Tổng kết</th>
+                                    {/* <th scope="col">Tổng kết</th> */}
                                 </tr>
                             </thead>
                             <tbody>

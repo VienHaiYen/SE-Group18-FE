@@ -32,7 +32,9 @@ function Information({ id, role }) {
     useEffect(() => {
         // if(role!=='admin')
         handleLoadUser();
-        handleGetClassList();
+        if (isAdmin) {
+            handleGetClassList();
+        }
     }, []);
     const handleGetClassList = async () => {
         let nid = 22231;

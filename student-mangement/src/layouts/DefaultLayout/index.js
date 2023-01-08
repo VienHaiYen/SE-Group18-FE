@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function DefaultLayout({ children, setLogin }) {
     let navigate = useNavigate();
-    const [role, setRole] = useState('admin');
+    const [role, setRole] = useState('student');
 
     let object = {
         id: '',
