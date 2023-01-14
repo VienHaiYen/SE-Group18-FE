@@ -12,6 +12,7 @@ const fetchUser = async (id) => {
     });
     if (info.status !== 200) {
         console.log('Data cua id ' + id + ' bi loi');
+        return null;
     }
     let data = await info.json();
 

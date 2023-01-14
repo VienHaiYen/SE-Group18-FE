@@ -1,73 +1,44 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-## To run json server
-### `npm run server`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-Open [http://localhost:5000](http://localhost:5000) to view fake database in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# GIỚI THIỆU ĐỒ ÁN NHÓM 18
+## Giới thiệu thành viên
+- 20120633: Viên Hải Yến
+- 20120634: Lê Minh Trí
+- 20120630: Trịnh Lê Nguyên Vũ
+- 20120521: Trần Thị Phương Linh
+## Giới thiệu về sản phẩm
+- Tên: PHẦN MỀM QUẢN LÍ HỌC SINH
+- Mục tiêu:
+  - Quản lí thông tin học sinh
+  - Lưu trữ điểm số
+  - Cho phép thao tác với dữ liệu
+- Người dùng:
+  - Quản trị viên: thực hiện các thao tác với thông tin người dùng (thêm, xóa, sửa) thông tin
+  - Giáo viên: nhập điểm và xem danh sách lớp
+  - Học sinh: xem điểm
+# MÔI TRƯỜNG THỰC THI
+- Ngôn ngữ sử dụng: Javascript (các thư viện như express, react,...)
+- Môi trường code: Visual studio code
+- Môi trường lưu trữ dữ liệu: MongoDB
+# HƯỚNG DẪN CẤU HÌNH PROJECT CHẠY TRÊN LOCALHOST
+**BƯỚC 1:** Thực thi server
+Vào SE-Group18-BE > student-database-api > npm run dev
+*Kết quả:* Môi trường server được chạy trên localhost:55000
+**BƯỚC 2:** Chạy môi trường Client
+Vào SE-Group18-FE > student-mangement > npm start
+*Kết quả:* Môi trường giao diện hiển thị được chạy trên localhost:3000
+**Cách chạy các vai trò với login khác nhau**
+- admin: Tài khoản a001-a005, mật khẩu: 123
+- giáo viên: Tài khoản t001-t020, mật khẩu: trùng với username
+- học sinh: Tài khoản: 22230002, 22230004,22230006,.... (có thể xem với vai trò của admin, cẩn thận với những mã hs không tồn tại), mật khẩu tương tự tài khoản
+# LINK GOOGLE DRIVE VIDEO DEMO
+https://drive.google.com/drive/folders/1nG4ZOr9bOxANz51Yr65ZHdJmv6Ntaq0c?usp=sharing
+# CURRENT STATUS
+- Hoàn thành ứng dụng cho học sinh, gv, quản trị viên tương tác điểm số
+- Hoàn thành việc kết nối ứng dụng với database, kết nối giao diện với server
+- Hiển thị các chức năng:
+  - Xem thông tin
+  - Xem danh sách lớp
+  - Xem danh sách giáo viên
+  - Nhập điểm, sửa điểm
+  - Phân công lớp
+  - Thành lập bảng điểm tổng kết
+  - Xem quy định
