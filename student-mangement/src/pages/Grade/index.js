@@ -193,16 +193,7 @@ function Grade({ id, role }) {
                                                 })}
                                         </select>
                                     </div>
-                                    <div className="form-group mr-3">
-                                        <label htmlFor="inputPassword4">Giáo viên bộ môn</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="inputPassword4"
-                                            placeholder="--Giáo viên bộ môn--"
-                                            disabled
-                                        />
-                                    </div>
+
                                     <div className="form-group mr-3">
                                         <label htmlFor="inputState">Môn học</label>
                                         <select
@@ -280,7 +271,7 @@ function Grade({ id, role }) {
                                     <th scope="col">Kiểm tra 45' (20%)</th>
                                     <th scope="col">Giữa kì (20%)</th>
                                     <th scope="col">Cuối kì (40%)</th>
-                                    {/* <th scope="col">Tổng kết</th> */}
+                                    <th scope="col">Tổng kết</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -304,6 +295,15 @@ function Grade({ id, role }) {
                                                     {studentGrade[subject]._ck !== null
                                                         ? studentGrade[subject]._ck
                                                         : ''}
+                                                </td>
+                                                <td>
+                                                    {(
+                                                        studentGrade[subject].mieng * 0.1 +
+                                                        studentGrade[subject]._15 * 0.1 +
+                                                        studentGrade[subject]._45 * 0.2 +
+                                                        studentGrade[subject]._gk * 0.2 +
+                                                        studentGrade[subject]._ck * 0.4
+                                                    ).toFixed(2)}
                                                 </td>
                                             </tr>
                                         );
@@ -362,7 +362,17 @@ function Grade({ id, role }) {
                                         <td>{grade.point._45}</td>
                                         <td>{grade.point._gk}</td>
                                         <td>{grade.point._ck}</td> */}
-                                            <td>----</td>
+                                            <td>
+                                                {grade !== null
+                                                    ? (
+                                                          grade.point.mieng * 0.1 +
+                                                          grade.point._15 * 0.1 +
+                                                          grade.point._45 * 0.2 +
+                                                          grade.point._gk * 0.2 +
+                                                          grade.point._ck * 0.4
+                                                      ).toFixed(2)
+                                                    : '--'}
+                                            </td>
                                         </tr>
                                     ))}
                             </tbody>

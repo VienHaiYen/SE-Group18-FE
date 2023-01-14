@@ -186,7 +186,11 @@ function Information({ id, role }) {
                                         className=" form-control"
                                         id="inputold4"
                                         placeholder="Lớp hiện tại"
-                                        value={user._class ? convertIdToClassname(user._class) : ''}
+                                        value={
+                                            user && user._class !== undefined && user._class !== null
+                                                ? convertIdToClassname(user._class)
+                                                : ''
+                                        }
                                         disabled
                                     />
                                 </div>
@@ -249,7 +253,7 @@ function Information({ id, role }) {
                     </button>
                 </form>
             )}
-            {user && user.id && (
+            {user && user.id !== null && (
                 <div style={{ fontSize: '1.2rem', width: '70%', maxWidth: '800px' }}>
                     <div className="form--row">
                         <div className="form-row-item">
@@ -330,7 +334,7 @@ function Information({ id, role }) {
                     </button>
                 </>
             )}
-            {!(isAdmin && id !== user.id) && (
+            {!(isAdmin && user && id !== user.id) && (
                 <button
                     type="button"
                     className="btn btn-dark"
